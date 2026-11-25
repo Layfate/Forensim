@@ -1,9 +1,12 @@
 // ai-tutor: policy-gated, retrieval-grounded study assistant (plan section 7.3).
 //
-//   Student message -> verify user -> assessment lock + daily quota -> retrieve ONLY lessons the
-//   user can already read (RLS, using the caller's JWT) -> add permitted performance aggregates
-//   -> free OpenRouter model -> log usage metadata -> answer + lesson references.
+//   Student message -> verify user -> assessment lock + daily quota -> retrieve from the published
+//   curriculum -> add permitted performance aggregates -> free OpenRouter model -> log usage
+//   metadata -> answer + references to lessons the user can open.
 //
+// Grounding uses the whole published curriculum (all published lessons in published modules), so
+// answers stay accurate even before a professor unlocks a lesson. Lesson links returned to the app
+// still point only to lessons the caller can open (RLS); locked ones are called "a later lesson".
 // Answer keys and rubrics are never queried here, so they cannot reach the model.
 // AI provider: OpenRouter, FREE models only (see ../_shared/openrouter.ts). If a free model is
 // rate-limited, out of allowance, down or too slow, the next available free model answers instead.
@@ -15,9 +18,9 @@ import { type ChatMessage, freeChat, openRouterKeys } from "../_shared/openroute
 
 /** Free models that write good, grounded tutoring answers, best first. Other live free models follow. */
 const PREFERRED = [
+  "nvidia/nemotron-3-ultra-550b-a55b:free",
   "google/gemma-4-31b-it:free",
   "nvidia/nemotron-3.5-super-vl:free",
-  "nvidia/nemotron-3-ultra-550b-a55b:free",
   "baidu/ernie-5.5-flash-preview:free",
   "inclusionai/ling-3.2-flash:free",
   "google/gemma-4-26b-a4b-it:free",
@@ -44,7 +47,7 @@ function json(body: unknown, status = 200) {
 
 const SYSTEM_PROMPT = `You are the Forensim study tutor for criminology students learning forensic science.
 
-Ground every answer in the lesson excerpts provided in the user turn. Cite the excerpts you use with their bracketed tags, for example [L2]. If the excerpts do not cover the question, say so plainly, give at most a brief general orientation, and suggest which module to study or that the student ask their professor. Do not invent sources, statistics, case law or procedures.
+Ground every answer in the lesson excerpts provided in the user turn. Cite the excerpts you use with their bracketed tags, for example [L2]. Excerpts marked "(later lesson)" come from lessons the student hasn't opened yet: use them for accuracy, but call them "a later lesson" and don't tell the student to open them now. If the excerpts do not cover the question, answer from well-established, textbook forensic science, start that part with "Not covered in your lessons:", and keep to facts that are standard in the field. Do not invent sources, statistics, case law or procedures.
 
 Accuracy comes first. Never contradict the lesson excerpts. Use only well-established forensic science; if you are not sure a fact is correct, say that you are not sure instead of guessing. Use the correct technical terms and define any term the excerpts do not define.
 
@@ -58,13 +61,14 @@ Write for a mobile screen: short paragraphs or a few bullet points, under about 
 
 type LessonRow = {
   id: string;
+  locked?: boolean;
   title: string;
   sections: { heading: string; body: string }[];
   key_terms: { term: string; definition: string }[];
   modules: { title: string; position: number } | null;
 };
 
-type Chunk = { lessonId: string; lessonTitle: string; moduleTitle: string; heading: string; text: string };
+type Chunk = { lessonId: string; lessonTitle: string; moduleTitle: string; heading: string; text: string; locked: boolean };
 
 const STOP = new Set(("a an and are as at be by can do does for from how i in is it of on or should the this to was what when where which who why with you your my me about").split(" "));
 
@@ -72,16 +76,16 @@ function tokens(s: string): string[] {
   return s.toLowerCase().replace(/[^a-z0-9\s-]/g, " ").split(/\s+/).filter((t) => t.length > 2 && !STOP.has(t));
 }
 
-function retrieve(question: string, lessons: LessonRow[], moduleHint: string | null, k = 5): Chunk[] {
+function retrieve(question: string, lessons: LessonRow[], moduleHint: string | null, k = 6): Chunk[] {
   const chunks: Chunk[] = [];
   for (const l of lessons) {
     const moduleTitle = l.modules?.title ?? "";
     for (const s of l.sections ?? []) {
-      chunks.push({ lessonId: l.id, lessonTitle: l.title, moduleTitle, heading: s.heading, text: s.body });
+      chunks.push({ lessonId: l.id, lessonTitle: l.title, moduleTitle, heading: s.heading, text: s.body, locked: !!l.locked });
     }
     if (l.key_terms?.length) {
       chunks.push({
-        lessonId: l.id, lessonTitle: l.title, moduleTitle, heading: "Key terms",
+        lessonId: l.id, lessonTitle: l.title, moduleTitle, heading: "Key terms", locked: !!l.locked,
         text: l.key_terms.map((t) => `${t.term}: ${t.definition}`).join(" "),
       });
     }
@@ -197,20 +201,27 @@ Deno.serve(async (req) => {
     return json({ blocked: true, reason: "daily_limit", answer: `You have reached today's limit of ${limit} tutor questions. It resets within 24 hours.`, references: [] });
   }
 
-  // 3) Retrieval from content the caller is already authorised to read (RLS applies).
-  const { data: lessons, error: lessonErr } = await userClient
-    .from("lessons").select("id, title, sections, key_terms, modules(title, position)").eq("published", true);
-  if (lessonErr) return json({ error: "Could not load course content" }, 500);
-  const chunks = retrieve(question, (lessons ?? []) as unknown as LessonRow[], body.module_title ?? null);
-  const references = [...new Map(chunks.map((c) => [c.lessonId, { lesson_id: c.lessonId, title: c.lessonTitle, module_title: c.moduleTitle }])).values()];
+  // 3) Retrieval over the whole published curriculum (service role), marking which lessons the
+  //    caller can open (their own RLS-filtered read). Only open lessons are linked or quoted verbatim.
+  const [all, open] = await Promise.all([
+    admin.from("lessons").select("id, title, sections, key_terms, modules!inner(title, position, published)")
+      .eq("published", true).eq("modules.published", true),
+    userClient.from("lessons").select("id"),
+  ]);
+  if (all.error || open.error) return json({ error: "Could not load course content" }, 500);
+  const openIds = new Set((open.data ?? []).map((l: { id: string }) => l.id));
+  const lessons = ((all.data ?? []) as unknown as LessonRow[]).map((l) => ({ ...l, locked: !openIds.has(l.id) }));
+  const chunks = retrieve(question, lessons, body.module_title ?? null);
+  const openChunks = chunks.filter((c) => !c.locked);
+  const references = [...new Map(openChunks.map((c) => [c.lessonId, { lesson_id: c.lessonId, title: c.lessonTitle, module_title: c.moduleTitle }])).values()];
 
   const perf = role === "student" && PERFORMANCE_HINT.test(question) ? await performanceSummary(userClient, userId) : null;
 
   // Lesson excerpts alone: used with no key, and when every free model fails.
   const excerptsOnly = (why: string) =>
-    chunks.length
+    openChunks.length
       ? `${why} Here are the most relevant parts of your lessons:\n\n` +
-        chunks.slice(0, 3).map((c) => `${c.lessonTitle}: ${c.heading}\n${c.text}`).join("\n\n")
+        openChunks.slice(0, 3).map((c) => `${c.lessonTitle}: ${c.heading}\n${c.text}`).join("\n\n")
       : `${why} No lesson section matched your question either. Try different keywords or browse the modules.`;
 
   const keys = await openRouterKeys(admin);
@@ -221,7 +232,7 @@ Deno.serve(async (req) => {
 
   // 4) Model call.
   const excerpts = chunks.length
-    ? chunks.map((c, i) => `[L${i + 1}] ${c.moduleTitle} / ${c.lessonTitle} / ${c.heading}\n${c.text}`).join("\n\n")
+    ? chunks.map((c, i) => `[L${i + 1}]${c.locked ? " (later lesson)" : ""} ${c.moduleTitle} / ${c.lessonTitle} / ${c.heading}\n${c.text}`).join("\n\n")
     : "(No lesson excerpt matched this question.)";
   const userTurn =
     `<lesson_excerpts>\n${excerpts}\n</lesson_excerpts>\n` +
@@ -260,5 +271,5 @@ Deno.serve(async (req) => {
   }
 
   await logUsage({ mode, blocked: false, reason: null, tokens_in: result.tokensIn, tokens_out: result.tokensOut });
-  return json({ blocked: false, answer: result.text, references: chunks.length ? references : [], model: result.model });
+  return json({ blocked: false, answer: result.text, references, model: result.model });
 });
