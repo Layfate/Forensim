@@ -14,6 +14,7 @@
   <img src="https://img.shields.io/badge/Android-8.0%2B-3DDC84?logo=android&logoColor=white" alt="Android 8.0+">
   <img src="https://img.shields.io/badge/Kotlin-Jetpack%20Compose-7F52FF?logo=kotlin&logoColor=white" alt="Kotlin and Jetpack Compose">
   <img src="https://img.shields.io/badge/backend-Supabase-3FCF8E?logo=supabase&logoColor=white" alt="Supabase">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License"></a>
 </p>
 
 <p align="center">
@@ -136,5 +137,4 @@ instead; see [SECURITY.md](SECURITY.md).
 
 ## License
 
-No license has been chosen yet, so all rights are reserved by the author. Please ask before reusing
-the code or assets.
+Forensim is released under the [MIT License](LICENSE). Copyright (c) 2026 Layfate.
