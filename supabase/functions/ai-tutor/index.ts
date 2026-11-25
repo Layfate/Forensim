@@ -23,7 +23,9 @@ const PREFERRED = [
   "google/gemma-4-26b-a4b-it:free",
   "nvidia/nemotron-3.5-lightning:free",
 ];
-const MAX_ATTEMPTS = 6;
+// The OpenRouter key's free allowance is shared by every user (50 requests a day without credits),
+// so one question tries at most 4 models.
+const MAX_ATTEMPTS = 4;
 // The app's HTTP read timeout is 90 s; stay well inside it across all model attempts.
 const TOTAL_BUDGET_MS = 70_000;
 const PER_MODEL_MS = 30_000;
@@ -43,6 +45,8 @@ function json(body: unknown, status = 200) {
 const SYSTEM_PROMPT = `You are the Forensim study tutor for criminology students learning forensic science.
 
 Ground every answer in the lesson excerpts provided in the user turn. Cite the excerpts you use with their bracketed tags, for example [L2]. If the excerpts do not cover the question, say so plainly, give at most a brief general orientation, and suggest which module to study or that the student ask their professor. Do not invent sources, statistics, case law or procedures.
+
+Accuracy comes first. Never contradict the lesson excerpts. Use only well-established forensic science; if you are not sure a fact is correct, say that you are not sure instead of guessing. Use the correct technical terms and define any term the excerpts do not define.
 
 When performance data is provided, explain it accurately and separate measured results (scores, completion) from your own study recommendations.
 
@@ -235,7 +239,7 @@ Deno.serve(async (req) => {
   const result = await freeChat({
     keys, messages, preferred: PREFERRED,
     needContext: Math.ceil(promptChars / 4) + 2000,
-    maxTokens: 1500, temperature: 0.3,
+    maxTokens: 1500, temperature: 0.2,
     maxAttempts: MAX_ATTEMPTS, totalBudgetMs: TOTAL_BUDGET_MS, perModelMs: PER_MODEL_MS,
     // A cut-off or near-empty reply is no answer: try the next free model.
     accept: (text) => text.trim().length >= 20,

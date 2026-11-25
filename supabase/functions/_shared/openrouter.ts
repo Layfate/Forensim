@@ -158,7 +158,8 @@ export async function freeChat(o: ChatOptions): Promise<ChatResult> {
       if (!res.ok) {
         // 402: free allowance used up; 429: rate limited; 404/400/5xx: model gone, busy or unable.
         problem = res.status === 402 || res.status === 429 ? "rate" : "busy";
-        console.warn(`${o.tag}: ${model} -> HTTP ${res.status}; trying the next free model`);
+        const why = (await res.text().catch(() => "")).slice(0, 200);
+        console.warn(`${o.tag}: ${model} -> HTTP ${res.status} ${why}; trying the next free model`);
         rest();
         continue;
       }
