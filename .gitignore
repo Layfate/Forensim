@@ -30,3 +30,10 @@ keystore.properties
 # Kotlin compiler caches and local Claude Code tooling
 .kotlin/
 .claude/
+
+# Private planning notes (kept locally, not published)
+/plan/
+
+# Python bytecode caches
+__pycache__/
+*.pyc

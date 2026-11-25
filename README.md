@@ -68,8 +68,8 @@ everyone inspect evidence up close, including in augmented reality through the p
 ## Download
 
 Get **`Forensim-x.y.z.apk`** from the [latest release](https://github.com/Layfate/Forensim/releases/latest)
-and open it on an Android phone (Android 8.0 or newer). Each release lists the signing certificate
-and SHA-256 checksums.
+and open it on an Android phone (Android 8.0 or newer). Each release lists the signing certificate,
+and GitHub shows the APK's SHA-256 digest next to the download so you can check the file.
 
 ## Tech stack
 
@@ -127,6 +127,12 @@ art/           Blender sources and scripts for the 3D models
 
 Forensim is in active development. Lesson content is a draft under instructor review. Issues and
 suggestions are welcome via [GitHub Issues](https://github.com/Layfate/Forensim/issues).
+
+## Reporting a vulnerability
+
+Please don't open a public issue for security problems. Use
+[private vulnerability reporting](https://github.com/Layfate/Forensim/security/advisories/new)
+instead; see [SECURITY.md](SECURITY.md).
 
 ## License
 
