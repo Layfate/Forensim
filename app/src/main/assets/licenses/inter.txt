@@ -1,0 +1,9 @@
+Inter typeface (res/font/inter_regular.otf, res/font/inter_semibold.otf), version 3.019
+
+Copyright (c) 2020 The Inter Project Authors (https://github.com/rsms/inter)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is available with a FAQ at: https://openfontlicense.org
+(formerly http://scripts.sil.org/OFL)
+
+The font files are distributed unmodified, as part of this application.

@@ -1,0 +1,157 @@
+{
+ "evidence_count": 4,
+ "briefing": "A neighbour reported shouting and a loud bang. The apartment is secured and the occupant is at hospital. Process the scene completely.",
+ "objectives": [
+  "Sign the scene entry log",
+  "Wear gloves before touching evidence",
+  "Mark and photograph each item, with and without scale",
+  "Collect with the correct technique",
+  "Package each item appropriately",
+  "Submit your case report"
+ ],
+ "room": {
+  "width": 9.0,
+  "depth": 10.0,
+  "height": 2.8,
+  "wall_color": "#3B4A52",
+  "floor_color": "#544636"
+ },
+ "door": {
+  "wall": "south",
+  "offset": 2.0,
+  "width": 1.2
+ },
+ "player_start": {
+  "x": 2.0,
+  "z": 9.2,
+  "yaw": 0
+ },
+ "scene_log": {
+  "x": 0.9,
+  "z": 9.6
+ },
+ "furniture": [
+  {
+   "id": "bed",
+   "x": 7.4,
+   "z": 2.0,
+   "w": 2.0,
+   "d": 2.4,
+   "h": 0.6,
+   "color": "#4E5D73"
+  },
+  {
+   "id": "desk",
+   "x": 1.2,
+   "z": 1.0,
+   "w": 1.6,
+   "d": 0.8,
+   "h": 0.75,
+   "color": "#7A5A44"
+  },
+  {
+   "id": "dining_table",
+   "x": 4.5,
+   "z": 5.5,
+   "w": 1.6,
+   "d": 1.0,
+   "h": 0.75,
+   "color": "#9AAFC2",
+   "top_label": "glass dining table"
+  },
+  {
+   "id": "cabinet",
+   "x": 8.5,
+   "z": 7.5,
+   "w": 0.8,
+   "d": 1.6,
+   "h": 1.2,
+   "color": "#6B4E3D"
+  },
+  {
+   "id": "partition",
+   "x": 5.0,
+   "z": 3.0,
+   "w": 3.0,
+   "d": 0.15,
+   "h": 2.2,
+   "color": "#3B4A52"
+  }
+ ],
+ "spawn_points": [
+  {
+   "id": "floor_bedside",
+   "label": "floor beside the bed",
+   "x": 5.8,
+   "z": 1.4,
+   "y": 0.0,
+   "surface": "floor"
+  },
+  {
+   "id": "floor_hall",
+   "label": "hallway floor",
+   "x": 2.2,
+   "z": 6.8,
+   "y": 0.0,
+   "surface": "floor"
+  },
+  {
+   "id": "floor_kitchen",
+   "label": "floor near the cabinet",
+   "x": 7.2,
+   "z": 8.4,
+   "y": 0.0,
+   "surface": "floor"
+  },
+  {
+   "id": "floor_desk",
+   "label": "floor under the desk chair",
+   "x": 2.4,
+   "z": 2.0,
+   "y": 0.0,
+   "surface": "floor"
+  },
+  {
+   "id": "desk_top",
+   "label": "desk surface",
+   "x": 1.2,
+   "z": 1.0,
+   "y": 0.75,
+   "surface": "furniture"
+  },
+  {
+   "id": "dining_top",
+   "label": "glass dining table",
+   "x": 4.5,
+   "z": 5.5,
+   "y": 0.75,
+   "surface": "furniture"
+  },
+  {
+   "id": "cabinet_top",
+   "label": "top of the cabinet",
+   "x": 8.5,
+   "z": 7.5,
+   "y": 1.2,
+   "surface": "furniture"
+  }
+ ],
+ "evidence_pool": [
+  {
+   "type": "cartridge_case"
+  },
+  {
+   "type": "latent_print"
+  },
+  {
+   "type": "bloodstain"
+  },
+  {
+   "type": "questioned_document"
+  },
+  {
+   "type": "hair_fiber"
+  }
+ ],
+ "practice_guide": true
+}

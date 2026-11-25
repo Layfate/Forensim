@@ -1,0 +1,8 @@
+# Normalise text files; keep the Unix scripts runnable on Linux/macOS (CI, other contributors).
+* text=auto
+gradlew text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+*.blend binary
+*.glb binary
+*.jar binary

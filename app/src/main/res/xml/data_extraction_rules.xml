@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Session tokens and per-user caches never leave the device (plan section 9 / 14). -->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="file" path="datastore/session.preferences_pb" />
+        <exclude domain="file" path="cache/" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="file" path="datastore/session.preferences_pb" />
+        <exclude domain="file" path="cache/" />
+    </device-transfer>
+</data-extraction-rules>

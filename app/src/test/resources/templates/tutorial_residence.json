@@ -1,0 +1,118 @@
+{
+ "fixed_seed": 1001,
+ "evidence_count": 2,
+ "briefing": "Patrol officers responded to a reported break-in. The occupant is safe and the scene is secured. Sign the scene log, then document, collect and package every item of evidence.",
+ "objectives": [
+  "Sign the scene entry log",
+  "Wear gloves before touching evidence",
+  "Mark and photograph each item, with and without scale",
+  "Collect with the correct technique",
+  "Package and seal each item",
+  "Submit your case report"
+ ],
+ "room": {
+  "width": 7.0,
+  "depth": 8.0,
+  "height": 2.8,
+  "wall_color": "#3A4558",
+  "floor_color": "#4A3F35"
+ },
+ "door": {
+  "wall": "south",
+  "offset": 3.5,
+  "width": 1.2
+ },
+ "player_start": {
+  "x": 3.5,
+  "z": 7.2,
+  "yaw": 0
+ },
+ "scene_log": {
+  "x": 2.4,
+  "z": 7.6
+ },
+ "furniture": [
+  {
+   "id": "sofa",
+   "x": 1.4,
+   "z": 2.2,
+   "w": 2.2,
+   "d": 0.9,
+   "h": 0.8,
+   "color": "#56677F"
+  },
+  {
+   "id": "coffee_table",
+   "x": 3.6,
+   "z": 3.4,
+   "w": 1.2,
+   "d": 0.7,
+   "h": 0.45,
+   "color": "#8FA3B8",
+   "top_label": "glass coffee table"
+  },
+  {
+   "id": "bookshelf",
+   "x": 6.6,
+   "z": 1.0,
+   "w": 0.6,
+   "d": 1.6,
+   "h": 2.0,
+   "color": "#6B4E3D"
+  },
+  {
+   "id": "side_table",
+   "x": 5.6,
+   "z": 5.2,
+   "w": 0.6,
+   "d": 0.6,
+   "h": 0.6,
+   "color": "#6B4E3D"
+  }
+ ],
+ "spawn_points": [
+  {
+   "id": "floor_window",
+   "label": "floor below the window",
+   "x": 4.8,
+   "z": 1.2,
+   "y": 0.0,
+   "surface": "floor"
+  },
+  {
+   "id": "floor_center",
+   "label": "floor near the centre",
+   "x": 2.6,
+   "z": 4.8,
+   "y": 0.0,
+   "surface": "floor"
+  },
+  {
+   "id": "table_top",
+   "label": "glass coffee table",
+   "x": 3.6,
+   "z": 3.4,
+   "y": 0.45,
+   "surface": "furniture"
+  },
+  {
+   "id": "side_table_top",
+   "label": "side table",
+   "x": 5.6,
+   "z": 5.2,
+   "y": 0.6,
+   "surface": "furniture"
+  }
+ ],
+ "evidence_pool": [
+  {
+   "type": "cartridge_case",
+   "required": true
+  },
+  {
+   "type": "latent_print",
+   "required": true
+  }
+ ],
+ "practice_guide": true
+}

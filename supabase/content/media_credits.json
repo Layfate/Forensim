@@ -1,0 +1,122 @@
+{
+ "bal_bullets": {
+  "credit": "Grasyl, CC BY-SA 4.0, via Wikimedia Commons",
+  "file": "Firearm Bullet Types CC BY-SA 4.0 by Grasyl.svg"
+ },
+ "bal_cartridge": {
+  "credit": "Forensim diagram"
+ },
+ "bal_comparison": {
+  "credit": "Tamasflex, CC BY-SA 3.0, via Wikimedia Commons",
+  "file": "ComparisonMicroscope.png"
+ },
+ "bal_fired_cases": {
+  "credit": "muppetspanker, CC BY-SA 2.0, via Wikimedia Commons",
+  "file": "Fired rimfire and centerfire casings.jpg"
+ },
+ "bal_ignition": {
+  "credit": "Grasyl, CC BY-SA 4.0, via Wikimedia Commons",
+  "file": "Cartridge ignition types Boxer Primer Berdan Primer Rimfire Pinfire Teatfire Cupfire cc BY-SA 4.0 by Grasyl.svg"
+ },
+ "bal_rifling_bore": {
+  "credit": "Bradley Lanphear for CAT Outdoors, CC BY-SA 4.0, via Wikimedia Commons",
+  "file": "Rifling inside a rifle barrel, view down the bore.jpg"
+ },
+ "bal_rifling_diagram": {
+  "credit": "Pbroks13, Public domain, via Wikimedia Commons",
+  "file": "Polygonal vs normal rifling.svg"
+ },
+ "chem_dose_response": {
+  "credit": "Forensim diagram"
+ },
+ "chem_evidence_bag": {
+  "credit": "Spc. Kissta Feldner, Public domain, via Wikimedia Commons",
+  "file": "Muhammed Adel Abdul Gafoor marks an evidence bag during a crime scene exploitation training exercise at Al Asad Air Base, Iraq, July 6, 2011 110706-A-FO214-900.jpg"
+ },
+ "chem_ghs": {
+  "credit": "GHS pictograms, public domain via Wikimedia Commons"
+ },
+ "chem_marquis": {
+  "credit": "Jack Spades, CC BY 2.0, via Wikimedia Commons",
+  "file": "Marquis Reagent.jpg"
+ },
+ "chem_paracelsus": {
+  "credit": "A.Hirschvogel, Public domain, via Wikimedia Commons",
+  "file": "Paracelsus-03.jpg"
+ },
+ "chem_tlc": {
+  "credit": "Minciw20, CC0, via Wikimedia Commons",
+  "file": "Thin layer chromatography under UV lamp.jpg"
+ },
+ "photo_camera_obscura": {
+  "credit": "en:User:Meggar, CC BY-SA 3.0, via Wikimedia Commons",
+  "file": "Camera obscura box.jpg"
+ },
+ "photo_chromatic": {
+  "credit": "Bob Mellish, CC BY-SA 3.0, via Wikimedia Commons",
+  "file": "Chromatic aberration lens diagram.svg"
+ },
+ "photo_em_spectrum": {
+  "credit": "Horst Frank, CC BY-SA 4.0, via Wikimedia Commons",
+  "file": "Electromagnetic spectrum -eng.svg"
+ },
+ "photo_niepce": {
+  "credit": "Joseph Nicéphore Niépce, Public domain, via Wikimedia Commons",
+  "file": "View from the Window at Le Gras, Joseph Nicéphore Niépce.jpg"
+ },
+ "photo_sd_cards": {
+  "credit": "Original: 毛抜き; derivative work: Tkgd2007, CC BY-SA 3.0, via Wikimedia Commons",
+  "file": "SD Cards.svg"
+ },
+ "photo_slr": {
+  "credit": "Bech, CC BY-SA 4.0, via Wikimedia Commons",
+  "file": "SLR cross section2.svg"
+ },
+ "pid_bertillon_card": {
+  "credit": "Jebulon, CC0, via Wikimedia Commons",
+  "file": "Bertillon, Alphonse, fiche anthropométrique recto-verso.jpg"
+ },
+ "pid_iris": {
+  "credit": "Carlos Eduardo Ravello Joo (ORCID · Q139714842), CC BY-SA 4.0, via Wikimedia Commons",
+  "file": "Iris-recognition-biometric-pipeline.svg"
+ },
+ "pid_minutiae": {
+  "credit": "Inaki Rom, CC BY-SA 4.0, via Wikimedia Commons",
+  "file": "Fingerprints Minutiae Patterns Representation.jpg"
+ },
+ "pid_patterns": {
+  "credit": "NIST fingerprint images, public domain via Wikimedia Commons"
+ },
+ "pid_portrait_parle": {
+  "credit": "Alphonse Bertillon, CC0, via Wikimedia Commons",
+  "file": "Tableau synoptic des traits physionomiques- pour servir a l'étude du \"portrait parlé\" MET DP362642.jpg"
+ },
+ "poly_ans": {
+  "credit": "Geo-Science-International, CC0, via Wikimedia Commons",
+  "file": "The Autonomic Nervous System.jpg"
+ },
+ "poly_keeler": {
+  "credit": "Agence de presse Meurisse, Public domain, via Wikimedia Commons",
+  "file": "Leonarde Keeler 1937.jpg"
+ },
+ "poly_lafayette": {
+  "credit": "Deutsches Spionagemuseum Berlin, CC BY-SA 4.0, via Wikimedia Commons",
+  "file": "Lügendetektor Polygraph Lafayette Model 76056 Deutsches Spionagemuseum Berlin, CC BY-SA 4.0.jpg"
+ },
+ "qde_signatures": {
+  "credit": "F.H. Kreuger, biographer of Van Meegeren, CC BY-SA 3.0, via Wikimedia Commons",
+  "file": "Van Meegeren signatures.jpg"
+ },
+ "qde_stereo": {
+  "credit": "GcG(jawp), Public domain, via Wikimedia Commons",
+  "file": "Optical stereo microscope nikon smz10.jpg"
+ },
+ "qde_typewriter": {
+  "credit": "Unknown author, Public domain, via Wikimedia Commons",
+  "file": "Parts of a Corona No. 3 folding typewriter (front).jpg"
+ },
+ "qde_watermark": {
+  "credit": "Amin, CC BY-SA 4.0, via Wikimedia Commons",
+  "file": "50 Euro bill watermark.jpg"
+ }
+}

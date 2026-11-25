@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Window background matches the Compose dark background to avoid a white flash at launch. -->
+    <style name="Theme.Forensim" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/forensim_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

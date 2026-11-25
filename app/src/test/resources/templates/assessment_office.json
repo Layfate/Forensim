@@ -1,0 +1,154 @@
+{
+ "evidence_count": 4,
+ "briefing": "Shots were reported in a small office after hours. The scene has been secured. Process it using correct procedure. This is a graded assessment: hints and the AI tutor are disabled until you submit.",
+ "objectives": [
+  "Process the scene according to correct procedure",
+  "Submit your case report"
+ ],
+ "room": {
+  "width": 10.0,
+  "depth": 9.0,
+  "height": 3.0,
+  "wall_color": "#424B5A",
+  "floor_color": "#3F4148"
+ },
+ "door": {
+  "wall": "south",
+  "offset": 8.0,
+  "width": 1.2
+ },
+ "player_start": {
+  "x": 8.0,
+  "z": 8.2,
+  "yaw": 0
+ },
+ "scene_log": {
+  "x": 9.1,
+  "z": 8.6
+ },
+ "furniture": [
+  {
+   "id": "desk_a",
+   "x": 2.0,
+   "z": 2.0,
+   "w": 1.8,
+   "d": 0.9,
+   "h": 0.75,
+   "color": "#7A5A44"
+  },
+  {
+   "id": "desk_b",
+   "x": 5.5,
+   "z": 2.0,
+   "w": 1.8,
+   "d": 0.9,
+   "h": 0.75,
+   "color": "#7A5A44"
+  },
+  {
+   "id": "meeting_table",
+   "x": 4.0,
+   "z": 6.0,
+   "w": 2.2,
+   "d": 1.2,
+   "h": 0.75,
+   "color": "#9AAFC2",
+   "top_label": "glass meeting table"
+  },
+  {
+   "id": "filing",
+   "x": 9.5,
+   "z": 1.5,
+   "w": 0.8,
+   "d": 1.2,
+   "h": 1.4,
+   "color": "#5D6B7E"
+  },
+  {
+   "id": "plant",
+   "x": 0.6,
+   "z": 8.2,
+   "w": 0.6,
+   "d": 0.6,
+   "h": 1.1,
+   "color": "#3E6B4A"
+  }
+ ],
+ "spawn_points": [
+  {
+   "id": "floor_desk_a",
+   "label": "floor beside desk A",
+   "x": 3.4,
+   "z": 2.4,
+   "y": 0.0,
+   "surface": "floor"
+  },
+  {
+   "id": "floor_desk_b",
+   "label": "floor behind desk B",
+   "x": 5.5,
+   "z": 0.8,
+   "y": 0.0,
+   "surface": "floor"
+  },
+  {
+   "id": "floor_center",
+   "label": "floor in the centre",
+   "x": 6.8,
+   "z": 4.6,
+   "y": 0.0,
+   "surface": "floor"
+  },
+  {
+   "id": "floor_west",
+   "label": "floor by the west wall",
+   "x": 0.8,
+   "z": 5.0,
+   "y": 0.0,
+   "surface": "floor"
+  },
+  {
+   "id": "desk_a_top",
+   "label": "desk A surface",
+   "x": 2.0,
+   "z": 2.0,
+   "y": 0.75,
+   "surface": "furniture"
+  },
+  {
+   "id": "meeting_top",
+   "label": "glass meeting table",
+   "x": 4.0,
+   "z": 6.0,
+   "y": 0.75,
+   "surface": "furniture"
+  },
+  {
+   "id": "filing_top",
+   "label": "top of the filing cabinet",
+   "x": 9.5,
+   "z": 1.5,
+   "y": 1.4,
+   "surface": "furniture"
+  }
+ ],
+ "evidence_pool": [
+  {
+   "type": "cartridge_case",
+   "required": true
+  },
+  {
+   "type": "latent_print"
+  },
+  {
+   "type": "bloodstain"
+  },
+  {
+   "type": "questioned_document"
+  },
+  {
+   "type": "hair_fiber"
+  }
+ ],
+ "practice_guide": false
+}
