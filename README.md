@@ -68,8 +68,8 @@ everyone inspect evidence up close, including in augmented reality through the p
 ## Download
 
 Get **`Forensim-x.y.z.apk`** from the [latest release](https://github.com/Layfate/Forensim/releases/latest)
-and open it on an Android phone (Android 8.0 or newer). Each release lists the signing certificate,
-and GitHub shows the APK's SHA-256 digest next to the download so you can check the file.
+and open it on an Android phone (Android 8.0 or newer). GitHub shows the APK's SHA-256 digest next
+to the download so you can check the file.
 
 ## Tech stack
 
