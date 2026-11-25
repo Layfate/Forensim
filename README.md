@@ -1,142 +1,134 @@
-# Forensim
+<p align="center">
+  <img src="docs/images/forensim-logo.png" width="160" alt="Forensim logo">
+</p>
 
-AI-assisted forensic learning for criminology students: an LMS, a playable first-person 3D crime
-scene, a 3D evidence viewer (AR fallback) and a policy-gated AI tutor. Android (Kotlin, Jetpack
-Compose, Material 3) on Supabase. Blueprint: [`plan/FORENSIM_IMPLEMENTATION_PLAN.md`](plan/FORENSIM_IMPLEMENTATION_PLAN.md).
+<h1 align="center">Forensim</h1>
 
-## What is implemented
+<p align="center">
+  <b>Forensic science learning for criminology students.</b><br>
+  Lessons, quizzes, 3D crime-scene simulations and an AR evidence lab, in one Android app.
+</p>
 
-| Plan area | Status |
+<p align="center">
+  <a href="https://github.com/Layfate/Forensim/releases/latest"><img src="https://img.shields.io/github/v/release/Layfate/Forensim?label=release&color=7a2335" alt="Latest release"></a>
+  <img src="https://img.shields.io/badge/Android-8.0%2B-3DDC84?logo=android&logoColor=white" alt="Android 8.0+">
+  <img src="https://img.shields.io/badge/Kotlin-Jetpack%20Compose-7F52FF?logo=kotlin&logoColor=white" alt="Kotlin and Jetpack Compose">
+  <img src="https://img.shields.io/badge/backend-Supabase-3FCF8E?logo=supabase&logoColor=white" alt="Supabase">
+</p>
+
+<p align="center">
+  <a href="https://github.com/Layfate/Forensim/releases/latest"><b>Download the latest APK</b></a>
+  &nbsp;·&nbsp;
+  <a href="#features">Features</a>
+  &nbsp;·&nbsp;
+  <a href="#build-from-source">Build from source</a>
+  &nbsp;·&nbsp;
+  <a href="docs/backend-setup.md">Backend setup</a>
+</p>
+
+---
+
+## About
+
+Forensim turns forensic science coursework into hands-on practice. Professors run their subject
+classes, publish lessons and quizzes, and generate crime-scene cases; students study, test
+themselves, and process those scenes in 3D before deciding what happened. An evidence lab lets
+everyone inspect evidence up close, including in augmented reality through the phone camera.
+
+<!-- Screenshots: add docs/images/screenshots/*.png here. -->
+
+## Features
+
+### For students
+- **Subject classes:** join with a class code from your professor; lessons, PDF modules and key terms unlock as your professor opens them.
+- **Quizzes:** graded quizzes (timed, server-graded) and practice quizzes with instant feedback.
+- **Every day:** a term, a quiz and a piece of evidence of the day, with a streak that follows your account.
+- **3D crime scenes:** walk the scene, sign the entry log, document, collect and package each item with the right tool, then report your conclusion. Unfinished cases resume where you left off.
+- **AI tutor:** answers grounded in your own lessons; paused during graded work.
+
+### For professors
+- **Case generator:** choose the case type, room, 2–7 evidence items, red herrings and an optional victim; Forensim builds a solvable scene and gives a code and QR to share. Case briefings are written to match the scene without giving the answer away.
+- **Class management:** class codes, join approval, roster, class chat, visibility of each lesson and quiz.
+- **Assessment:** graded or practice cases and quizzes, feedback release, insights and CSV export.
+- **AI quiz drafts** from a topic or an uploaded PDF, reviewed before publishing.
+
+### Evidence lab and AR
+- **46 specimens in 7 categories:** ballistics, prints and impressions, biological and trace, weapons, tools and restraints, drugs, documents and belongings.
+- **3D viewer** with identifying features and the correct collection and packaging for each item.
+- **Augmented reality**, chosen automatically for each phone:
+
+  | Phone | Experience |
+  |---|---|
+  | ARCore-supported | Full AR: place a specimen life-size on a real table and walk around it |
+  | Camera, no ARCore | **Marker AR** (OpenCV): print the marker from the app and the specimen stands on it at true size; otherwise a gyroscope camera view |
+  | No camera or sensors | 3D viewer |
+
+- Swipe between specimens, and tap the yellow **INSPECT** tag for the evidence file.
+
+## Download
+
+Get **`Forensim-x.y.z.apk`** from the [latest release](https://github.com/Layfate/Forensim/releases/latest)
+and open it on an Android phone (Android 8.0 or newer). Each release lists the signing certificate
+and SHA-256 checksums.
+
+## Tech stack
+
+| Area | Technology |
 |---|---|
-| Phase 1 foundation: auth, server-resolved roles, role navigation, RLS, settings | Done |
-| Phase 2 LMS: 7 modules / 14 lessons, progress, join-by-code, offline lesson cache, publishing | Done |
-| Phase 3 secure assessment: server-held keys, timed attempts, server grading, review policies, audit log | Done |
-| Phase 4 playable 3D case: joystick, touch look, optional gyro, collisions, reticle, tools, evidence states, chain of custody, tutorial, event log | Done (`.glb` rooms, furniture, evidence and victim bodies; see `art/README.md`) |
-| Offline practice sync (plan section 9) | Done: training parts, practice case reports and case progress made offline are kept per user on the phone (`core/data/PracticeSync.kt`) and sent when the server is reachable again (app start / sign-in, Simulate tab, WorkManager job on network). Practice cases opened online once can be replayed offline. Graded cases still need a connection |
-| Phase 5 procedural scenes: seeded generator, spawn validation, reachability, server manifest, rubric scoring | Done (3 templates) |
-| Phase 6 hybrid AR | 3D viewer fallback only; marker AR and ARCore not started |
-| Phase 7 AI tutor | Edge Function done (OpenRouter free models with automatic fallback, retrieval-grounded, assessment lock, quota); needs `OPENROUTER_API_KEY` secret |
-| Professor tools | Tabs: Home (AI assistant, upload PDF modules, quiz builder, module/lesson/quiz visibility, insights, CSV export), Classes (class code, roster, case feedback release), Lab (3D scenes + AR viewer), Profile. Professors publish directly; no admin approval |
-| Admin tools | Create/delete accounts (`admin-users` Edge Function), roles/suspension (audited), catalog, platform stats, audit log, AI limit, system notice |
+| App | Kotlin, Jetpack Compose, Material 3, Navigation, WorkManager, DataStore |
+| 3D | Custom OpenGL ES 3 renderer with `.glb` models (rooms, furniture, evidence, victims) |
+| AR | Google ARCore · CameraX · OpenCV (ArUco markers) · rotation-vector sensors |
+| Backend | Supabase: Postgres with row-level security, Auth, Storage, Edge Functions (Deno) |
+| AI | OpenRouter free models with automatic fallback (tutor and quiz drafts) |
 
-All lesson content is a **draft marked `pending_review`**. A qualified instructor must review it.
+## Build from source
 
-## Project layout
+Requirements: Android Studio (recent), JDK 17+, Android SDK 37.
+
+```bash
+git clone https://github.com/Layfate/Forensim.git
+cd Forensim
+./gradlew :app:assembleDebug        # debug APK: app/build/outputs/apk/debug/
+./gradlew :app:testDebugUnitTest    # unit tests
+```
+
+The app points at the project's Supabase instance with its public (publishable) key. To run your
+own backend, apply `supabase/migrations/`, deploy `supabase/functions/`, and change the two
+`buildConfigField` values in `app/build.gradle.kts`; see **[docs/backend-setup.md](docs/backend-setup.md)**.
+
+Release builds are signed with an upload key kept outside the repository; without it they fall
+back to the debug key. Details are in the backend guide.
+
+Backend tests (scoring, AI model fallback and live row-level-security checks) are listed in the
+[backend guide](docs/backend-setup.md#tests).
+
+## Project structure
 
 ```
 app/src/main/java/com/forensim/app/
-  core/designsystem   theme tokens + shared components (docs/design-system.md)
-  core/network        minimal Supabase client (GoTrue, PostgREST, Edge Functions) on OkHttp
-  core/data           repositories, DataStore settings/session, per-user offline cache
-  core/model          wire models mirroring the schema
-  engine/             renderer-independent gameplay (pure Kotlin, unit tested)
-    scene/            ScenarioTemplate + seeded SceneGenerator
-    physics/          CollisionWorld + PlayerController
-    interaction/      tools
-    controls/         GyroController (rotation-vector, no drift)
-    renderer/         OpenGL ES 3 renderer (swap point for Filament/SceneView + .glb)
-    SimulationGame.kt evidence state machine, targeting, coaching, event recorder
-  feature/            auth, student, lms, quiz, tutor, simulation, ar, settings, professor, admin
+  core/        design system, Supabase client, repositories, models
+  engine/      3D scenes, scene generator, physics, renderer (pure Kotlin, unit tested)
+  feature/     auth, student, professor, admin, lms, quiz, simulation, ar, tutor, settings
 supabase/
-  migrations/         schema, RLS, trusted RPCs, seed curriculum, grants (applied to the project)
-  functions/          submit-simulation (rubric scoring), ai-tutor and ai-quiz (OpenRouter free models, shared code in `_shared/openrouter.ts`), admin-users (create/delete accounts)
-  seed/dev_users.sql  dev accounts template (no secrets)
-  tests/              live RLS / RPC smoke test
+  migrations/  schema, row-level security, trusted RPCs, seed curriculum
+  functions/   submit-simulation (scoring), ai-tutor, ai-quiz, admin-users, delete-account
+docs/          backend setup, design system, Play Store and legal pages, AR marker
+art/           Blender sources and scripts for the 3D models
 ```
 
-## Backend (Supabase project `dadmvplgluqewozshtdz`)
+## Security and privacy
 
-Migrations and both Edge Functions are **already applied/deployed**. The app ships only the
-publishable key (`app/build.gradle.kts`). Security model:
+- Row-level security on every table; roles are server-side and audited.
+- Answer keys and scoring rubrics live in a schema the API never exposes; the server does all grading.
+- The camera is used only on the phone for AR; nothing is recorded or uploaded.
+- Only the Supabase publishable key ships in the app; secrets stay in Supabase.
 
-- RLS on every table, default deny. Roles live in `user_roles` and are changed only by the audited
-  `admin_set_role` function.
-- Answer keys (`private.answer_keys`) and simulation rubrics (`private.simulation_rubrics`) are in a
-  schema the API does not expose. Graded questions are invisible until the student holds an attempt.
-- Quiz attempts, saving answers, grading, replays and review release are `SECURITY DEFINER`
-  functions; the client never submits a score.
-- Simulation scoring happens in the `submit-simulation` Edge Function against the private rubric.
-- The AI tutor retrieves only lessons the caller can already read, refuses while any graded
-  attempt is open (enforced server-side), and logs usage for quotas.
+## Project status
 
-### Remaining manual steps
+Forensim is in active development. Lesson content is a draft under instructor review. Issues and
+suggestions are welcome via [GitHub Issues](https://github.com/Layfate/Forensim/issues).
 
-00000000. **Fix "Could not choose the best candidate function … professor_create_case"** (not yet applied):
-   the database has both the old 9-argument and the new 11-argument `professor_create_case`, because
-   20261127 ran without 20261126. SQL editor: run these two files **in this order**:
-   1. `supabase/migrations/20261126000001_case_resume_and_victim.sql` (drops the old version, adds the victim
-      columns the new version writes, plus resumable cases);
-   2. `supabase/migrations/20261128000001_five_red_herrings.sql` (puts back the current function body, which
-      step 1 replaced with an older one, and raises the red-herring limit from 3 to 5).
-   Both are safe to run again.
+## License
 
-0000000. **Delete quizzes** (not yet applied): SQL editor: run
-   `supabase/migrations/20261129000001_delete_quizzes.sql` (`professor_delete_quiz`, `professor_set_quiz_hidden`,
-   table `class_hidden_quizzes`). Until it runs, press-and-hold → Delete on a quiz puts the quiz back and shows
-   "Deleting quizzes needs a server update first."
-
-000000. **Up to 5 red herrings** (not yet applied): SQL editor: run
-   `supabase/migrations/20261128000001_five_red_herrings.sql` (`professor_create_case` allows 5 red herrings
-   instead of 3; the app offers 0-5). Until it runs, creating a case with 4 or 5 red herrings fails with "A case
-   can have at most 3 red herrings"; cases with 0-3 still work.
-
-00000. **More evidence + red herrings** (applied):
-   - SQL editor: run `supabase/migrations/20261127000001_more_evidence_and_red_herrings.sql` (20 new evidence types
-     in the case pools, `private.red_herring_types()`, up to 7 evidence + 3 red herrings per case).
-   - Edge Functions: redeploy `submit-simulation` (rubric for the new types; red herrings are never scored for
-     procedure, and citing one as proof costs a point).
-   Until both are done, creating a case with red herrings or new evidence types fails with "Evidence does not
-   match the case type", and the new types would score without a rubric.
-
-0000. **Resumable cases + victims** (not yet applied): SQL editor: run
-   `supabase/migrations/20261126000001_case_resume_and_victim.sql` (victim columns on `case_sessions`,
-   saved progress on `simulation_attempts`, `my_cases`, `save_case_progress`, updated `start_case` and
-   `professor_create_case`). Until it runs, Simulate falls back to the old history list, practice cases
-   start fresh each time, and creating a case *with a victim* fails (cases without one still work).
-
-000. **Professor publishing + admin accounts** (not yet applied):
-   - SQL editor: run `supabase/migrations/20261122000006_professor_publishing.sql` (PDF bucket `lesson-pdfs`, storage
-     policies, `professor_*` RPCs, `service_audit`).
-   - Edge Functions: deploy `supabase/functions/admin-users/index.ts` as `admin-users` (JWT verification on).
-
-0. **Google / Facebook sign-in** (the app side is done: Custom Tabs + PKCE, redirect
-   `com.forensim.app://login-callback`):
-   - Supabase → Authentication → URL Configuration → *Redirect URLs*: add `com.forensim.app://login-callback`.
-   - Google Cloud Console → create an OAuth client (Web application) with the authorised redirect URI
-     `https://dadmvplgluqewozshtdz.supabase.co/auth/v1/callback`; paste its client ID/secret into
-     Supabase → Authentication → Providers → Google, and enable it.
-   - Meta for Developers → create an app with Facebook Login, same callback URL; paste the app ID/secret into
-     Providers → Facebook, and enable it.
-   Until a provider is enabled, its button explains that it is not switched on yet.
-00. **Password policy on the server**: Authentication → Providers → Email → minimum length **10** and
-   required characters **lowercase, uppercase, digits and symbols**, matching the app's sign-up checklist
-   (`core/auth/PasswordPolicy.kt`).
-
-1. **AI key** (tutor + quiz drafts): Supabase dashboard → Edge Functions → Secrets → add `OPENROUTER_API_KEY`.
-   Only free OpenRouter models are used; when one is busy, rate-limited or down the next free one answers.
-   Optional `OPENROUTER_MODELS` (comma-separated `:free` ids) puts your favorite models first. Without a key,
-   or when every free model fails, the tutor answers with lesson excerpts.
-   Deploy both functions together, since they share `_shared/openrouter.ts`:
-   `supabase functions deploy ai-tutor ai-quiz`.
-2. **Auth hardening**: enable leaked-password protection (Auth → Password security).
-3. **Dev accounts**: `student@`, `professor@`, `admin@forensim.test` exist for testing; passwords
-   are in the git-ignored `supabase/seed/DEV_ACCOUNTS.local.md`. Delete or rotate them before release.
-4. New sign-ups are students. If e-mail confirmation is on (Supabase default), users confirm by
-   e-mail before signing in.
-
-## Build and test
-
-```bash
-./gradlew :app:assembleDebug          # APK
-./gradlew :app:testDebugUnitTest      # engine tests (generator determinism, collisions, procedure)
-node --test supabase/functions/submit-simulation/scoring.test.ts   # rubric scoring tests
-python -I supabase/tests/rls_smoke_test.py   # live RLS/RPC checks (uses one graded attempt)
-```
-
-Student join code for the seed class: `FSCI-3A26`.
-
-## Known gaps / next steps
-
-- Camera marker AR (CameraX + OpenCV ArUco) and ARCore path (Phase 6).
-- Hilt (manual `AppContainer` today), CI, release signing, Play Data Safety materials.
-- On-device performance profiling on low/mid-range hardware.
+No license has been chosen yet, so all rights are reserved by the author. Please ask before reusing
+the code or assets.
