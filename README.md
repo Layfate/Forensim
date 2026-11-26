@@ -25,6 +25,8 @@
   <a href="#build-from-source">Build from source</a>
   &nbsp;·&nbsp;
   <a href="docs/backend-setup.md">Backend setup</a>
+  &nbsp;·&nbsp;
+  <a href="https://layfate.github.io/Forensim/legal/privacy-policy.html">Privacy</a>
 </p>
 
 ---
@@ -46,12 +48,19 @@ everyone inspect evidence up close, including in augmented reality through the p
 - **Every day:** a term, a quiz and a piece of evidence of the day, with a streak that follows your account.
 - **3D crime scenes:** walk the scene, sign the entry log, document, collect and package each item with the right tool, then report your conclusion. Unfinished cases resume where you left off.
 - **AI tutor:** answers grounded in your own lessons; paused during graded work.
+- **Report and block:** report a chat message, a classmate or an AI answer, and block someone so their messages are hidden.
 
 ### For professors
 - **Case generator:** choose the case type, room, 2–7 evidence items, red herrings and an optional victim; Forensim builds a solvable scene and gives a code and QR to share. Case briefings are written to match the scene without giving the answer away.
 - **Class management:** class codes, join approval, roster, class chat, visibility of each lesson and quiz.
 - **Assessment:** graded or practice cases and quizzes, feedback release, insights and CSV export.
 - **AI quiz drafts** from a topic or an uploaded PDF, reviewed before publishing.
+- **Moderation:** remove messages in the class chat and review reports from your classes.
+
+### For administrators
+- **Accounts:** add, suspend, reactivate or delete accounts and change roles; every change is written to an audit log.
+- **Reported content:** review reports from class chats and the AI tools, remove messages and close reports.
+- **Platform:** usage statistics, course and class overview, AI tutor daily limit and a notice shown to every student.
 
 ### Evidence lab and AR
 - **46 specimens in 7 categories:** ballistics, prints and impressions, biological and trace, weapons, tools and restraints, drugs, documents and belongings.
@@ -123,6 +132,8 @@ art/           Blender sources and scripts for the 3D models
 - Answer keys and scoring rubrics live in a schema the API never exposes; the server does all grading.
 - The camera is used only on the phone for AR; nothing is recorded or uploaded.
 - Only the Supabase publishable key ships in the app; secrets stay in Supabase.
+- Users can delete their account in the app (Profile > Settings > Account) or [on the web](https://layfate.github.io/Forensim/legal/delete-account.html).
+- [Privacy Policy](https://layfate.github.io/Forensim/legal/privacy-policy.html) · [Terms of Use](https://layfate.github.io/Forensim/legal/terms-of-use.html)
 
 ## Project status
 
