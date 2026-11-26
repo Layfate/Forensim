@@ -392,6 +392,21 @@ data class ClassMessage(
     @SerialName("created_at") val createdAt: String,
 )
 
+/** An in-app report of a chat message, a user or AI-generated content (Google Play UGC / AI policies). */
+@Serializable
+data class ContentReport(
+    val id: Long,
+    val kind: String,
+    val reason: String,
+    val details: String? = null,
+    @SerialName("class_id") val classId: String? = null,
+    @SerialName("message_id") val messageId: Long? = null,
+    @SerialName("reported_user_id") val reportedUserId: String? = null,
+    val excerpt: String? = null,
+    val status: String = "open",
+    @SerialName("created_at") val createdAt: String,
+)
+
 @Serializable
 data class EvidenceFeedback(
     @SerialName("evidence_id") val evidenceId: String,

@@ -205,6 +205,39 @@ class ClassChatViewModel(private val c: AppContainer, private val classId: Strin
         }
     }
 
+    // Reporting and blocking (Google Play User Generated Content policy) -------------------------
+
+    /** People this user blocked: their messages are hidden on this device. */
+    var blocked by mutableStateOf<Set<String>>(emptySet()); private set
+    /** Short confirmation after a report or a block. */
+    var notice by mutableStateOf<String?>(null)
+
+    init { viewModelScope.launch { c.settings.blockedUsers.collect { blocked = it } } }
+
+    /** Reports [m] (or, with [asUser], its sender) to the administrators and the class's professor. */
+    fun report(m: ClassMessage, asUser: Boolean, reason: String, details: String) {
+        viewModelScope.launch {
+            try {
+                c.reports.report(
+                    kind = if (asUser) "user" else "chat_message", reason = reason, details = details,
+                    classId = classId, messageId = if (asUser) null else m.id, reportedUserId = m.senderId,
+                    excerpt = if (asUser) "User: ${m.senderName}" else "${m.senderName}: ${m.body}",
+                )
+                error = null
+                notice = "Thanks. Your report was sent for review."
+            } catch (e: ApiException) {
+                error = if (e.isNetwork) "Report not sent: you're offline." else e.message
+            }
+        }
+    }
+
+    fun setBlocked(userId: String, name: String, on: Boolean) {
+        viewModelScope.launch {
+            c.settings.setBlocked(userId, on)
+            notice = if (on) "You blocked $name. Their messages are hidden on this phone." else "You unblocked $name."
+        }
+    }
+
     override fun onCleared() { stopLive() }
 }
 
@@ -220,6 +253,10 @@ fun ClassChatScreen(classId: String, title: String, canModerate: Boolean, onBack
     // The emoji panel and the keyboard take turns: opening one closes the other.
     androidx.activity.compose.BackHandler(enabled = emojiOpen) { emojiOpen = false }
     var toDelete by remember { mutableStateOf<ClassMessage?>(null) }
+    var menuFor by remember { mutableStateOf<ClassMessage?>(null) }
+    /** Message to report, and whether the report is about its sender rather than the message. */
+    var reportTarget by remember { mutableStateOf<Pair<ClassMessage, Boolean>?>(null) }
+    var manageBlocked by remember { mutableStateOf(false) }
     val listState = rememberLazyListState()
     // Newest message is at index 0 (reverse layout): keep it in view as messages arrive.
     LaunchedEffect(vm.messages.lastOrNull()?.id, vm.pending.size) {
@@ -250,7 +287,9 @@ fun ClassChatScreen(classId: String, title: String, canModerate: Boolean, onBack
                             contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = Spacing.md, vertical = Spacing.sm),
                             verticalArrangement = Arrangement.spacedBy(6.dp),
                         ) {
-                            val newestFirst = (vm.messages + vm.pending).asReversed()
+                            // Messages from people this user blocked are hidden (their own never are).
+                            val newestFirst = (vm.messages + vm.pending)
+                                .filter { it.senderId == vm.myId || it.senderId !in vm.blocked }.asReversed()
                             itemsIndexed(newestFirst, key = { _, m -> m.id }) { i, m ->
                                 val mine = m.senderId == vm.myId
                                 // Name and photo only on the first message of a run from the same person.
@@ -258,7 +297,8 @@ fun ClassChatScreen(classId: String, title: String, canModerate: Boolean, onBack
                                 val sendingNow = m.id < 0
                                 Bubble(m, mine, today, firstOfRun, vm.photos[m.senderId],
                                     Modifier.alpha(if (sendingNow) 0.6f else 1f).combinedClickable(
-                                        onClick = {}, onLongClick = { if (!sendingNow && (mine || canModerate)) toDelete = m },
+                                        onClickLabel = null, onLongClickLabel = "Message options",
+                                        onClick = {}, onLongClick = { if (!sendingNow) menuFor = m },
                                     ))
                             }
                         }
@@ -267,6 +307,19 @@ fun ClassChatScreen(classId: String, title: String, canModerate: Boolean, onBack
             }
             vm.error?.takeIf { vm.status == ChatStatus.READY }?.let {
                 Banner(it, Tone.ATTENTION, modifier = Modifier.padding(horizontal = Spacing.md))
+            }
+            vm.notice?.takeIf { vm.status == ChatStatus.READY && vm.error == null }?.let {
+                LaunchedEffect(it) { delay(4_000); if (vm.notice == it) vm.notice = null }
+                Banner(it, Tone.SUCCESS, modifier = Modifier.padding(horizontal = Spacing.md))
+            }
+            val hiddenSenders = vm.messages.filter { it.senderId != vm.myId && it.senderId in vm.blocked }
+                .distinctBy { it.senderId }
+            if (vm.status == ChatStatus.READY && hiddenSenders.isNotEmpty()) {
+                TextButton(onClick = { manageBlocked = true }, modifier = Modifier.padding(horizontal = Spacing.sm)) {
+                    Text(if (hiddenSenders.size == 1) "Messages from 1 blocked person are hidden · Manage"
+                        else "Messages from ${hiddenSenders.size} blocked people are hidden · Manage",
+                        style = MaterialTheme.typography.labelLarge)
+                }
             }
             if (vm.status == ChatStatus.READY) {
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
@@ -326,6 +379,65 @@ fun ClassChatScreen(classId: String, title: String, canModerate: Boolean, onBack
             },
             dismissButton = { TextButton(onClick = { toDelete = null }) { Text("Cancel") } },
         )
+    }
+
+    // Long-press options: report the message or its sender, block the sender, or delete.
+    menuFor?.let { m ->
+        val mine = m.senderId == vm.myId
+        val name = m.senderName.ifBlank { "this person" }
+        AlertDialog(
+            onDismissRequest = { menuFor = null },
+            title = { Text(if (mine) "Your message" else name) },
+            text = {
+                Column {
+                    if (!mine) {
+                        MenuOption("Report message") { reportTarget = m to false; menuFor = null }
+                        MenuOption("Report $name") { reportTarget = m to true; menuFor = null }
+                        MenuOption("Block $name") { vm.setBlocked(m.senderId, name, true); menuFor = null }
+                    }
+                    if (mine || canModerate) MenuOption("Delete message", danger = true) { toDelete = m; menuFor = null }
+                }
+            },
+            confirmButton = { TextButton(onClick = { menuFor = null }) { Text("Close") } },
+        )
+    }
+
+    reportTarget?.let { (m, asUser) ->
+        val name = m.senderName.ifBlank { "this person" }
+        com.forensim.app.feature.report.ReportDialog(
+            title = if (asUser) "Report $name" else "Report message",
+            explanation = "Your report goes to the administrators and your professor, who can remove the message or the person. $name won't see who reported them.",
+            onDismiss = { reportTarget = null },
+            onSubmit = { reason, details -> vm.report(m, asUser, reason, details); reportTarget = null },
+        )
+    }
+
+    if (manageBlocked) {
+        val people = vm.messages.filter { it.senderId != vm.myId && it.senderId in vm.blocked }.distinctBy { it.senderId }
+        AlertDialog(
+            onDismissRequest = { manageBlocked = false },
+            title = { Text("Blocked people") },
+            text = {
+                Column {
+                    if (people.isEmpty()) Text("No one in this chat is blocked.")
+                    people.forEach { p ->
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(p.senderName.ifBlank { "Classmate" }, Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge)
+                            TextButton(onClick = { vm.setBlocked(p.senderId, p.senderName.ifBlank { "Classmate" }, false) }) { Text("Unblock") }
+                        }
+                    }
+                }
+            },
+            confirmButton = { TextButton(onClick = { manageBlocked = false }) { Text("Done") } },
+        )
+    }
+}
+
+@Composable
+private fun MenuOption(label: String, danger: Boolean = false, onClick: () -> Unit) {
+    TextButton(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
+        Text(label, Modifier.fillMaxWidth(), style = MaterialTheme.typography.bodyLarge,
+            color = if (danger) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface)
     }
 }
 

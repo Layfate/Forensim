@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Assessment
+import androidx.compose.material.icons.outlined.Flag
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.ManageAccounts
 import androidx.compose.material.icons.outlined.School
@@ -152,12 +153,14 @@ fun AdminApp(user: UserAccount) {
     var tab by rememberSaveable { mutableIntStateOf(0) }
     var pending by remember { mutableStateOf<Triple<AdminUser, Role, String>?>(null) }
     var showProfile by rememberSaveable { mutableStateOf(false) }
+    var showReports by rememberSaveable { mutableStateOf(false) }
     var userQuery by rememberSaveable { mutableStateOf("") }
     var creating by rememberSaveable { mutableStateOf(false) }
     var deleting by remember { mutableStateOf<AdminUser?>(null) }
     val current = AdminTab.entries[tab]
     val tabStates = androidx.compose.runtime.saveable.rememberSaveableStateHolder()
     androidx.activity.compose.BackHandler(showProfile) { showProfile = false }
+    androidx.activity.compose.BackHandler(showReports) { showReports = false }
     WorkspaceScaffold(
         destinations = AdminTab.entries.mapIndexed { index, destination ->
             val compactLabel = when (destination) {
@@ -168,12 +171,15 @@ fun AdminApp(user: UserAccount) {
             WorkspaceDestination(destination.label, destination.icon, selected = index == tab, compactLabel = compactLabel) {
                 tab = index
                 showProfile = false
+                showReports = false
             }
         },
-        showNavigation = !showProfile,
+        showNavigation = !showProfile && !showReports,
     ) {
         if (showProfile) {
             ProfileScreen(user, onBack = { showProfile = false })
+        } else if (showReports) {
+            com.forensim.app.feature.report.ReportReviewScreen(onBack = { showReports = false })
         } else tabStates.SaveableStateProvider(current.name) {
             ScreenScaffold(title = "Administration") { inner ->
                 LoadContent(vm.state, vm::load, Modifier.padding(inner)) { d, _ ->
@@ -254,6 +260,14 @@ fun AdminApp(user: UserAccount) {
                             }
                             AdminTab.REPORTS -> {
                                 val stats = d.stats
+                                item("flagged") {
+                                    SectionHeader("Moderation")
+                                    com.forensim.app.core.designsystem.ListGroup {
+                                        com.forensim.app.core.designsystem.ListRow("Reported content",
+                                            subtitle = "Chat messages, people and AI answers users reported",
+                                            icon = Icons.Outlined.Flag, onClick = { showReports = true })
+                                    }
+                                }
                                 item("people") {
                                     SectionHeader("Accounts")
                                     DashboardStats("Students" to "${stats["students"] ?: 0}",

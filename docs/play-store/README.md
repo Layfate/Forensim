@@ -1,13 +1,14 @@
 # Publishing checklist (Play Store + GitHub Releases)
 
-1. **Host the legal pages** (`docs/legal/*.html`) at a public URL, e.g. GitHub Pages from this
-   repo's `docs/` folder. You'll get:
-   - Privacy policy: `https://<user>.github.io/<repo>/legal/privacy-policy.html`
-   - Terms: `.../legal/terms-of-use.html`
-   - Account deletion: `.../legal/delete-account.html`
+1. **Legal pages** are published by GitHub Pages from this repo's `docs/` folder:
+   - Privacy policy: `https://layfate.github.io/Forensim/legal/privacy-policy.html`
+   - Terms: `https://layfate.github.io/Forensim/legal/terms-of-use.html`
+   - Account deletion: `https://layfate.github.io/Forensim/legal/delete-account.html`
    After editing `LegalScreens.kt`, run `python docs/legal/build_legal_html.py` to regenerate.
-2. **Upload key**: create it in `C:\Users\corti\Documents\Forensimkeys` (never in the repo), point
-   the release `signingConfig` at it, and enrol in Play App Signing.
+2. **Upload key**: already in `C:\Users\corti\Documents\Forensimkeys` (never in the repo); the
+   release build signs with it. Enrol in Play App Signing. To let GitHub-APK users update from Play
+   (and the reverse), choose to upload this key as the *app signing key* during setup instead of
+   letting Google generate one; this choice is permanent.
 3. **Version**: raise `versionCode` (and `versionName`) in `app/build.gradle.kts` for every upload.
 4. **Build**: `./gradlew :app:bundleRelease` (AAB for Play) and `:app:assembleRelease` (APK for
    GitHub Releases).

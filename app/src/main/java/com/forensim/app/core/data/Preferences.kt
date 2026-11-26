@@ -174,6 +174,14 @@ class SettingsRepository(private val context: Context) {
     suspend fun setTheme(theme: ThemePreference) = context.settingsDataStore.edit { it[Keys.theme] = theme.name }
     suspend fun setReducedMotion(on: Boolean) = context.settingsDataStore.edit { it[Keys.reducedMotion] = on }
 
+    /** People this user blocked in class chats: their messages are hidden on this device. */
+    private val blockedKey = androidx.datastore.preferences.core.stringSetPreferencesKey("blocked_users")
+    val blockedUsers: Flow<Set<String>> = context.settingsDataStore.data.map { it[blockedKey].orEmpty() }
+    suspend fun setBlocked(userId: String, blocked: Boolean) = context.settingsDataStore.edit { p ->
+        val now = p[blockedKey].orEmpty()
+        p[blockedKey] = if (blocked) now + userId else now - userId
+    }
+
     suspend fun updateSound(s: SoundSettings) = context.settingsDataStore.edit {
         it[Keys.soundEffects] = s.effects
         it[Keys.soundVolume] = s.volume.coerceIn(0f, 1f)

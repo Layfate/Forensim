@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Logout
 import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.material.icons.outlined.Flag
 import androidx.compose.material.icons.outlined.Groups
 import androidx.compose.material.icons.outlined.Insights
 import androidx.compose.material.icons.outlined.Settings
@@ -64,6 +65,7 @@ internal fun ProfessorProfileHub(
     openAssistant: () -> Unit,
     openSettings: () -> Unit,
     openControls: () -> Unit,
+    openReports: () -> Unit,
 ) {
     var confirmLogout by rememberSaveable { mutableStateOf(false) }
     val data = (vm.state as? Load.Ready)?.data
@@ -86,6 +88,8 @@ internal fun ProfessorProfileHub(
                     })
                     ListDivider()
                     ListRow(stringResource(R.string.ai_assistant), icon = Icons.Outlined.AutoAwesome, onClick = openAssistant)
+                    ListDivider()
+                    ListRow(stringResource(R.string.reported_content), icon = Icons.Outlined.Flag, onClick = openReports)
                     ListDivider()
                     ListRow(stringResource(R.string.settings), icon = Icons.Outlined.Settings, onClick = openSettings)
                     ListDivider()

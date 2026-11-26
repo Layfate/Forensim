@@ -7,7 +7,7 @@
 
 **Category:** Education · **Tags:** Education, Science, Simulation
 **Contact email:** elorde.princeart6881@gmail.com
-**Privacy policy URL:** `<your site>/legal/privacy-policy.html`
+**Privacy policy URL:** `https://layfate.github.io/Forensim/legal/privacy-policy.html`
 
 ## Full description (max 4000)
 
@@ -48,10 +48,13 @@ tool for processing real evidence.
 
 ## Graphics checklist
 
+The icon and feature graphic use the glossy maroon background. Regenerate both (and the launcher
+icons) with `python art/scripts/make_icons.py`.
+
 | Asset | Spec | Status |
 |---|---|---|
-| App icon | 512 × 512 PNG, 32-bit, ≤ 1 MB | export from the launcher icon |
-| Feature graphic | 1024 × 500 PNG/JPG, no transparency | to make |
+| App icon | 512 × 512 PNG, 32-bit, ≤ 1 MB | ready: [`icon-512.png`](icon-512.png) |
+| Feature graphic | 1024 × 500 PNG/JPG, no transparency | ready: [`feature-graphic.png`](feature-graphic.png) |
 | Phone screenshots | 2–8, PNG/JPG, 9:16, 1080 × 1920 or larger (≤ 3840 px) | see below |
 | 7" / 10" tablet screenshots | optional (recommended if you want tablet visibility) | optional |
 

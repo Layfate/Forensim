@@ -275,8 +275,28 @@ fun CreateQuizScreen(vm: ProfessorViewModel, classId: String?, onBack: () -> Uni
                     PageIntro("New quiz", Modifier.padding(top = Spacing.md), description = "Multiple choice, for one of your classes only. Answers are kept on the server and graded there.")
                     ClassPicker(d, selected) { selected = it }
                     aiAdded?.let { n ->
+                        var reportingDraft by remember { mutableStateOf(false) }
+                        var reportNotice by remember { mutableStateOf<String?>(null) }
                         Spacer(Modifier.height(Spacing.sm))
                         Banner("Added $n AI-drafted question${if (n == 1) "" else "s"}. Check each question, answer and explanation before publishing.", Tone.ATTENTION)
+                        // Google Play AI-Generated Content policy: offensive or wrong AI output can be reported in the app.
+                        TextButton(onClick = { reportingDraft = true }) { Text("Report a problem with the AI draft") }
+                        reportNotice?.let { Banner(it, Tone.NEUTRAL) }
+                        if (reportingDraft) {
+                            com.forensim.app.feature.report.ReportDialog(
+                                title = "Report the AI draft",
+                                explanation = "Tell us what's wrong with the AI-generated questions. The current questions are sent to the administrators for review.",
+                                reasons = com.forensim.app.feature.report.AI_REASONS,
+                                onDismiss = { reportingDraft = false },
+                                onSubmit = { reason, details ->
+                                    reportingDraft = false
+                                    val excerpt = questions.mapIndexed { i, q ->
+                                        "${i + 1}. ${q.prompt}\n" + q.options.mapIndexed { j, o -> "  ${if (j == q.correct) "*" else "-"} $o" }.joinToString("\n")
+                                    }.joinToString("\n")
+                                    vm.reportAiDraft(reason, details, excerpt) { reportNotice = it }
+                                },
+                            )
+                        }
                     }
                     SectionHeader("Settings")
                     OutlinedTextField(title, { title = it }, label = { Text("Quiz title") }, singleLine = true, modifier = Modifier.fillMaxWidth())

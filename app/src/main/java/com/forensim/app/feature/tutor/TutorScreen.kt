@@ -26,6 +26,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.outlined.Flag
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.School
 import androidx.compose.material3.AssistChip
@@ -90,6 +91,30 @@ class TutorViewModel(private val c: AppContainer, private val moduleTitle: Strin
             }
         }
     }
+
+    /** Confirmation or error after reporting an answer. */
+    var reportNotice by mutableStateOf<Pair<String, Boolean>?>(null)
+
+    /**
+     * Reports an AI answer (Google Play AI-Generated Content policy): the answer and the question
+     * that produced it go to the administrators for review.
+     */
+    fun report(answer: ChatMessage, reason: String, details: String) {
+        val i = messages.indexOf(answer)
+        val question = messages.take(maxOf(i, 0)).lastOrNull { it.fromUser }?.text
+        viewModelScope.launch {
+            reportNotice = try {
+                c.reports.report(kind = "ai_tutor", reason = reason, details = details,
+                    excerpt = buildString {
+                        question?.let { append("Question: ").append(it.take(1500)).append("\n\n") }
+                        append("Answer: ").append(answer.text)
+                    })
+                "Thanks. The answer was reported for review." to true
+            } catch (e: ApiException) {
+                (if (e.isNetwork) "Report not sent: you're offline." else e.message) to false
+            }
+        }
+    }
 }
 
 private val suggestions = listOf(
@@ -108,6 +133,7 @@ fun TutorScreen(moduleTitle: String?, openLesson: (String) -> Unit, onBack: (() 
     val messageCount = vm.messages.size
     val sending = vm.sending
     val locked = vm.locked
+    var reporting by androidx.compose.runtime.remember { mutableStateOf<ChatMessage?>(null) }
     LaunchedEffect(messageCount, sending, locked, reduceMotion) {
         if (messageCount > 0) {
             val last = messageCount - 1 + (if (locked) 1 else 0) + (if (sending) 1 else 0)
@@ -141,7 +167,10 @@ fun TutorScreen(moduleTitle: String?, openLesson: (String) -> Unit, onBack: (() 
                         }
                     }
                 }
-                items(messageCount, key = { "message-$it" }) { index -> Bubble(vm.messages[index], openLesson) }
+                items(messageCount, key = { "message-$it" }) { index ->
+                    val m = vm.messages[index]
+                    Bubble(m, openLesson, onReport = if (!m.fromUser && !m.notice) ({ reporting = m }) else null)
+                }
                 if (sending) item("pending") {
                     Row(Modifier.semantics { liveRegion = LiveRegionMode.Polite },
                         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
@@ -149,6 +178,10 @@ fun TutorScreen(moduleTitle: String?, openLesson: (String) -> Unit, onBack: (() 
                         Text("Finding relevant lessons…", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
+            }
+            vm.reportNotice?.let { (text, ok) ->
+                LaunchedEffect(text) { kotlinx.coroutines.delay(4_000); if (vm.reportNotice?.first == text) vm.reportNotice = null }
+                Banner(text, if (ok) Tone.SUCCESS else Tone.ATTENTION, modifier = Modifier.padding(horizontal = Spacing.md, vertical = Spacing.xs))
             }
             Surface(color = MaterialTheme.colorScheme.surfaceContainerLow) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -173,10 +206,20 @@ fun TutorScreen(moduleTitle: String?, openLesson: (String) -> Unit, onBack: (() 
             }
         }
     }
+
+    reporting?.let { m ->
+        com.forensim.app.feature.report.ReportDialog(
+            title = "Report this answer",
+            explanation = "Tell us what's wrong with this AI answer. The answer and your question are sent to the administrators so they can review it and improve the tutor.",
+            reasons = com.forensim.app.feature.report.AI_REASONS,
+            onDismiss = { reporting = null },
+            onSubmit = { reason, details -> vm.report(m, reason, details); reporting = null },
+        )
+    }
 }
 
 @Composable
-private fun Bubble(m: ChatMessage, openLesson: (String) -> Unit) {
+private fun Bubble(m: ChatMessage, openLesson: (String) -> Unit, onReport: (() -> Unit)? = null) {
     Box(Modifier.fillMaxWidth(), contentAlignment = if (m.fromUser) Alignment.CenterEnd else Alignment.CenterStart) {
         Surface(
             color = when {
@@ -197,6 +240,17 @@ private fun Bubble(m: ChatMessage, openLesson: (String) -> Unit) {
                     m.references.forEach { r ->
                         AssistChip(onClick = { openLesson(r.lessonId) }, label = { Text(r.title) },
                             modifier = Modifier.heightIn(min = Spacing.touchTarget))
+                    }
+                }
+                if (onReport != null) {
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                        Text("AI-generated. Check it against your lessons.", style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
+                        com.forensim.app.core.designsystem.TextButton(onClick = onReport) {
+                            Icon(Icons.Outlined.Flag, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(Modifier.size(4.dp))
+                            Text("Report", style = MaterialTheme.typography.labelLarge)
+                        }
                     }
                 }
             }

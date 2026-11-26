@@ -22,7 +22,7 @@ import com.forensim.app.core.designsystem.WorkspaceList
 object LegalInfo {
     const val APP = "Forensim"
     const val CONTACT_EMAIL = "elorde.princeart6881@gmail.com"
-    const val EFFECTIVE_DATE = "November 24, 2026"
+    const val EFFECTIVE_DATE = "November 26, 2026"
 }
 
 enum class LegalDocument { TERMS, PRIVACY }
@@ -48,9 +48,12 @@ private val TERMS = listOf(
     )),
     LegalSection("5. Acceptable use", listOf(
         "Do not: break the law using ${LegalInfo.APP}; upload unlawful, offensive or infringing content (including profile photos); harass other users; try to access data or features you are not authorised to use; probe, scan or attack our systems; reverse engineer the app except where the law allows; or use automated tools to access ${LegalInfo.APP}.",
+        "Class chats, profile photos and anything else you post must not contain harassment, bullying, threats, hate speech, sexual content, graphic violence, spam, other people's personal information, or content that promotes illegal or dangerous acts. We have zero tolerance for this content.",
+        "You can report a chat message, a classmate, an AI tutor answer or an AI quiz draft in the app, and block a person so you no longer see their chat messages. Reports go to the school's administrators and, for class chats, the class's professor. They may remove content and suspend or remove accounts that break these rules.",
     )),
-    LegalSection("6. AI tutor", listOf(
-        "The AI tutor uses a third-party AI model to answer questions about your lessons. AI answers can be incomplete or wrong; check important points against your lessons and your professor. Daily usage limits apply, and requests that are unsafe or unrelated to your studies may be refused.",
+    LegalSection("6. AI tutor and AI quiz generator", listOf(
+        "The AI tutor, and the quiz generator for professors, use free third-party AI models reached through OpenRouter. AI answers and drafts can be incomplete or wrong; check important points against your lessons and your professor, and professors must review AI-drafted questions before publishing them. Daily usage limits apply, and requests that are unsafe or unrelated to your studies may be refused.",
+        "Do not type personal or sensitive information (yours or anyone else's) into the AI tutor. If an AI answer is offensive, harmful or wrong, report it with the Report button under the answer.",
     )),
     LegalSection("7. Content and intellectual property", listOf(
         "${LegalInfo.APP}, its design, software, lessons, simulations and quizzes are protected by intellectual property laws. We give you a personal, non-transferable, revocable licence to use them for your own studies while you have an account. Third-party images, videos and fonts remain the property of their owners and are used under their licences, credited in the app where required.",
@@ -84,17 +87,22 @@ private val PRIVACY = listOf(
         "Account information: your name, email address, password (stored only as a secure hash by our authentication provider) and your role (student, professor or administrator).",
         "Profile information you choose to add: gender, student ID number and a profile photo.",
         "Learning activity: classes you join or create, lesson progress, quiz answers, scores and timing, actions and scores in 3D case simulations, and your answers to the daily quiz and evidence challenges on the home screen (used to show your daily streak).",
-        "AI tutor: the questions you type are sent for processing to answer you (see section 4). We keep a usage record for each request (time, type, whether it was blocked and the amount of text processed) to enforce daily limits. We do not store the text of your questions or the tutor's answers on our servers.",
+        "AI tutor: the questions you type are sent to an AI model to answer you (see section 4). We keep a usage record for each request (time, type, whether it was blocked and the amount of text processed) to enforce daily limits. We do not store the text of your questions or the tutor's answers on our servers, unless you report an answer (see Reports below).",
+        "AI quiz generator (professors): the topic you enter, or the text extracted on your device from a PDF you choose, is sent to an AI model to draft questions. The PDF file itself is not uploaded for this. Drafts are kept only if you publish the quiz.",
+        "Reports and blocking: when you report something, we store the report (your account, the reason, any note you add, and a copy of the reported message, person's name or AI text, including the question that produced a reported AI answer) so administrators and, for class chats, the class's professor can review it. People you block are saved only on your device.",
+        "Class photos: professors may add a cover photo to a class; it is stored privately and shown only to that class.",
         "Sign-in with Google or Facebook: if you choose it, we receive your name and email address from that provider.",
         "On your device only: your app settings (theme, language, controls, sound, notifications), your onboarding answers, saved lessons for offline use and a copy of your profile photo. If you allow notifications, a daily study reminder is created on your device; no notification service receives your data. The app also checks your connection status and whether your device has a gyroscope or camera to enable features; these checks stay on your device.",
+        "Camera: if you allow it, the AR evidence viewer uses your camera to show 3D evidence in your room (with Google Play Services for AR on supported phones, or a printed marker on other phones). Camera images are processed only on your device to place the model. They are never recorded, saved or sent to us. Scanning a class QR code uses Google's code scanner, which returns only the code to the app.",
     )),
     LegalSection("3. What we do not collect", listOf(
-        "${LegalInfo.APP} does not access your location, contacts, microphone or camera, does not show ads, does not use third-party analytics or advertising trackers, and does not sell your personal information.",
+        "${LegalInfo.APP} does not access your location, contacts or microphone, does not record or upload camera images, does not show ads, does not use third-party analytics or advertising trackers, and does not sell your personal information.",
     )),
     LegalSection("4. How we use and share information", listOf(
         "We use your information to create and secure your account, deliver lessons, quizzes and simulations, grade work, show progress to you and your professors, run the AI tutor, keep the service working and prevent misuse.",
         "Professors can see the progress, attempts, answers and scores of students in the classes they teach. School administrators can manage accounts and see audit records of administrative actions.",
-        "Service providers who process data on our behalf: Supabase (database, sign-in and file storage hosting); Anthropic (the AI model behind the tutor), which receives your question, the recent conversation and relevant lesson excerpts (and, when you ask about your scores or progress, a short summary of your recent results); Google and Meta when you use their sign-in; and Google/YouTube when you play a lesson video (videos load only after you tap play).",
+        "Service providers who process data on our behalf: Supabase (database, sign-in and file storage hosting); OpenRouter, which passes AI tutor and quiz generator requests to the company that runs the free AI model selected for that request; Google and Meta when you use their sign-in; and Google/YouTube when you play a lesson video (videos load only after you tap play).",
+        "What the AI receives: for the tutor, your question, the recent conversation and relevant lesson excerpts (and, when you ask about your scores or progress, a short summary of your recent results); for the quiz generator, the topic or PDF text. Your name, email and account ID are not sent. Free AI models are provided under their providers' own terms, and some providers may keep requests and use them to improve their models, so do not include personal information in what you type.",
         "We may also disclose information if required by law, or to protect the rights, safety and security of our users and service.",
     )),
     LegalSection("5. Storage and security", listOf(
@@ -102,7 +110,7 @@ private val PRIVACY = listOf(
     )),
     LegalSection("6. Retention", listOf(
         "We keep your information while your account is active and as long as needed for your school's academic records.",
-        "When an account is deleted, its profile, photo, class memberships, lesson progress, quiz and case attempts and scores, chat messages, daily quiz answers and AI tutor usage records are deleted immediately. Classes, lessons and cases the account created for other students are kept without the author's identity, so those students keep their coursework. Audit records of administrative actions are kept for accountability with the account's identity removed, except where an administrator removed the account, in which case the record keeps the removed account's email address. Backups held by our hosting provider are overwritten on their normal schedule.",
+        "When an account is deleted, its profile, photo, class memberships, lesson progress, quiz and case attempts and scores, chat messages, daily quiz answers and AI tutor usage records are deleted immediately. Reports the account made or received are kept for moderation without the link to the account. Classes, lessons and cases the account created for other students are kept without the author's identity, so those students keep their coursework. Audit records of administrative actions are kept for accountability with the account's identity removed, except where an administrator removed the account, in which case the record keeps the removed account's email address. Backups held by our hosting provider are overwritten on their normal schedule.",
     )),
     LegalSection("7. Your rights and choices", listOf(
         "Under the Data Privacy Act you may ask to access, correct or delete your personal information, object to its processing, or receive a copy of it. You can edit your name, gender, student ID and photo in the app at any time. You may also file a complaint with the National Privacy Commission of the Philippines.",

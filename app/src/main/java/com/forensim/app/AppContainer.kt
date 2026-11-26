@@ -45,6 +45,7 @@ class AppContainer(context: Context) {
     val learning = LearningRepository(supabase, cache)
     val simulation = SimulationRepository(supabase, cache)
     val tutor = TutorRepository(supabase)
+    val reports = com.forensim.app.core.data.ReportRepository(supabase)
     val chat = com.forensim.app.core.data.ChatRepository(supabase, cache, java.io.File(appContext.cacheDir, "chat_photos"))
     val staff = StaffRepository(supabase)
     val profile = ProfileRepository(supabase, appContext)

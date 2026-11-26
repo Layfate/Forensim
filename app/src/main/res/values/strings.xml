@@ -44,6 +44,7 @@
     <string name="resume_lesson">Resume lesson</string>
     <string name="min_read">%1$d min read</string>
     <string name="ai_assistant">AI assistant</string>
+    <string name="reported_content">Reported content</string>
     <string name="ai_tutor">AI tutor</string>
     <string name="ask_any_lesson">Ask about any lesson</string>
     <string name="assistant_default_sub">Ask about lessons, procedures and evidence handling.</string>

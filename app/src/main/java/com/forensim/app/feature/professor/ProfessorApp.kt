@@ -495,6 +495,18 @@ class ProfessorViewModel(private val c: AppContainer) : ViewModel() {
     var aiDraft by mutableStateOf<com.forensim.app.core.data.GeneratedQuiz?>(null)
 
     /** Drafts questions with AI from a topic and/or extracted PDF text; [onResult] fills the editor. */
+    /** Reports an AI quiz draft (Google Play AI-Generated Content policy); [onDone] gets a message to show. */
+    fun reportAiDraft(reason: String, details: String, excerpt: String, onDone: (String) -> Unit) {
+        viewModelScope.launch {
+            onDone(try {
+                c.reports.report(kind = "ai_quiz", reason = reason, details = details, excerpt = excerpt)
+                "Thanks. The AI draft was reported for review."
+            } catch (e: com.forensim.app.core.network.ApiException) {
+                if (e.isNetwork) "Report not sent: you're offline." else e.message
+            })
+        }
+    }
+
     fun generateQuiz(topic: String?, sourceText: String?, count: Int, difficulty: String,
                      onResult: (com.forensim.app.core.data.GeneratedQuiz) -> Unit) {
         if (generating) return
@@ -541,6 +553,7 @@ class ProfessorViewModel(private val c: AppContainer) : ViewModel() {
 @Serializable data class CreateQuizRoute(val classId: String? = null)
 @Serializable data class AiQuizRoute(val classId: String? = null)
 @Serializable data object CaseBuilderRoute
+@Serializable data object ProfReportsRoute
 @Serializable data class CaseDetailRoute(val caseId: String)
 
 private data class ProfTab(
@@ -628,6 +641,7 @@ fun ProfessorApp(user: UserAccount) {
                     openAssistant = { nav.navigate(TutorRoute()) },
                     openSettings = { nav.navigate(SettingsRoute) },
                     openControls = { nav.navigate(ControlsRoute) },
+                    openReports = { nav.navigate(ProfReportsRoute) },
                 )
             }
             composable<SettingsRoute> {
@@ -671,6 +685,7 @@ fun ProfessorApp(user: UserAccount) {
                 com.forensim.app.feature.ar.ArCameraScreen(back.toRoute<ArCameraRoute>().type, onBack = { nav.popBackStack() })
             }
             composable<ControlsRoute> { ControlSettingsScreen(onBack = { nav.popBackStack() }) }
+            composable<ProfReportsRoute> { com.forensim.app.feature.report.ReportReviewScreen(onBack = { nav.popBackStack() }) }
         }
     }
 }

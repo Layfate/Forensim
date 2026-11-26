@@ -44,6 +44,7 @@
     <string name="resume_lesson">Ituloy ang aralin</string>
     <string name="min_read">%1$d minutong basahin</string>
     <string name="ai_assistant">AI assistant</string>
+    <string name="reported_content">Mga ini-report na nilalaman</string>
     <string name="ai_tutor">AI tutor</string>
     <string name="ask_any_lesson">Magtanong tungkol sa kahit anong aralin</string>
     <string name="assistant_default_sub">Magtanong tungkol sa mga aralin, proseso at paghawak ng ebidensya.</string>

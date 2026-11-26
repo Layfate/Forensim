@@ -649,6 +649,39 @@ class TutorRepository(private val client: SupabaseClient) {
         )
 }
 
+// --------------------------------------------------------------------------- reports
+
+/**
+ * In-app reports of class chat messages, users and AI-generated content, as Google Play's User
+ * Generated Content and AI-Generated Content policies require. Administrators (and the class's
+ * professor, for chat) review them; see migration 20261204000001_content_reports.sql.
+ */
+class ReportRepository(private val client: SupabaseClient) {
+    suspend fun report(
+        kind: String, reason: String, details: String? = null, classId: String? = null,
+        messageId: Long? = null, reportedUserId: String? = null, excerpt: String? = null,
+    ) = client.insert("content_reports", buildJsonObject {
+        put("kind", kind)
+        put("reason", reason)
+        details?.trim()?.takeIf { it.isNotEmpty() }?.let { put("details", it.take(500)) }
+        classId?.let { put("class_id", it) }
+        messageId?.let { put("message_id", it) }
+        reportedUserId?.takeIf { it.isNotBlank() }?.let { put("reported_user_id", it) }
+        excerpt?.takeIf { it.isNotBlank() }?.let { put("excerpt", it.take(4000)) }
+    })
+
+    /** Open reports the caller may review (all for administrators). */
+    suspend fun open(): List<com.forensim.app.core.model.ContentReport> =
+        client.select("content_reports?select=*&status=eq.open&order=created_at.desc&limit=200",
+            ListSerializer(com.forensim.app.core.model.ContentReport.serializer()))
+
+    suspend fun resolve(id: Long) = client.update("content_reports", "id=eq.$id", buildJsonObject {
+        put("status", "resolved")
+        put("resolved_at", java.time.Instant.now().toString())
+        client.session.value?.userId?.let { put("resolved_by", it) }
+    })
+}
+
 // --------------------------------------------------------------------------- staff
 
 /** Private bucket for class cover photos, objects at <class_id>/<random>.jpg. */
