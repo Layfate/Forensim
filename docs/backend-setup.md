@@ -1,6 +1,6 @@
 # Backend setup and maintenance
 
-Forensim runs on one Supabase project. The app ships only the project URL and its **publishable**
+ForenSim runs on one Supabase project. The app ships only the project URL and its **publishable**
 key (`app/build.gradle.kts`); the service-role key and AI provider keys live only in Supabase
 (Edge Function secrets). This page is for maintainers.
 

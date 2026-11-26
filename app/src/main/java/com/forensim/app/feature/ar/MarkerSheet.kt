@@ -22,7 +22,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 /**
- * The printable Forensim marker: one A4 page with the ArUco marker at exactly
+ * The printable ForenSim marker: one A4 page with the ArUco marker at exactly
  * [MarkerTracker.MARKER_SIZE_M] (10 cm), a 10 cm ruler to check it printed at 100 %, and short
  * instructions. Opened in Android's print screen, which can also "Save as PDF".
  */
@@ -48,7 +48,7 @@ object MarkerSheet {
         c.drawColor(Color.WHITE)
         val text = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.BLACK; textSize = 18f; isFakeBoldText = true }
         val small = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.DKGRAY; textSize = 11f }
-        c.drawText("Forensim AR marker", 56f, 70f, text)
+        c.drawText("ForenSim AR marker", 56f, 70f, text)
         listOf(
             "Print at 100% (actual size, no \"fit to page\"). The black square must measure 10 cm.",
             "Lay it flat on a table, open Evidence lab > Open camera and point the phone at it.",
@@ -81,7 +81,7 @@ object MarkerSheet {
         val file = File(context.cacheDir, "forensim-ar-marker.pdf")
         writePdf(file)
         val pm = context.getSystemService(Context.PRINT_SERVICE) as PrintManager
-        pm.print("Forensim AR marker", object : PrintDocumentAdapter() {
+        pm.print("ForenSim AR marker", object : PrintDocumentAdapter() {
             override fun onLayout(old: PrintAttributes?, new: PrintAttributes, cancel: CancellationSignal?,
                                   callback: LayoutResultCallback, extras: Bundle?) {
                 if (cancel?.isCanceled == true) { callback.onLayoutCancelled(); return }

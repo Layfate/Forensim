@@ -416,7 +416,7 @@ private fun AboutSettings() {
     Column(Modifier.fillMaxWidth().padding(vertical = Spacing.lg), horizontalAlignment = Alignment.CenterHorizontally) {
         ForensimMark(72.dp)
         Spacer(Modifier.height(Spacing.md))
-        Text("Forensim", style = MaterialTheme.typography.headlineSmall)
+        Text("ForenSim", style = MaterialTheme.typography.headlineSmall)
         Text(stringResource(R.string.about_tagline), style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant)
         Spacer(Modifier.height(Spacing.sm))
@@ -598,9 +598,9 @@ private fun AdvancedSettings() {
         val copiedMsg = stringResource(R.string.diagnostics_copied)
         Spacer(Modifier.height(Spacing.sm))
         OutlinedButton(onClick = {
-            val text = "Forensim diagnostics\n" + diag.joinToString("\n") { (l, v) -> "$l: $v" }
+            val text = "ForenSim diagnostics\n" + diag.joinToString("\n") { (l, v) -> "$l: $v" }
             val cm = context.getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
-            cm.setPrimaryClip(android.content.ClipData.newPlainText("Forensim diagnostics", text))
+            cm.setPrimaryClip(android.content.ClipData.newPlainText("ForenSim diagnostics", text))
             done = copiedMsg to false
         }, modifier = buttonMod) { Text(stringResource(R.string.copy_diagnostics)) }
         Spacer(Modifier.height(Spacing.sm))

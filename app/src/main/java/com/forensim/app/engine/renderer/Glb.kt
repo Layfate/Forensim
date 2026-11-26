@@ -15,7 +15,7 @@ import java.nio.ByteOrder
 import kotlin.math.pow
 
 /**
- * Minimal glTF 2.0 binary (.glb) reader for the Forensim asset set (art/README.md): static
+ * Minimal glTF 2.0 binary (.glb) reader for the ForenSim asset set (art/README.md): static
  * triangle meshes with a base colour (factor and/or PNG texture), emission and alpha mode. No
  * skins, morph targets or animation. Pure Kotlin, so it is unit tested on the JVM; GPU upload
  * lives in [GlesRenderer].

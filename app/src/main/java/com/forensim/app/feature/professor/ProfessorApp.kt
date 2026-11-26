@@ -705,7 +705,7 @@ private fun ProfessorHome(
     openProfile: () -> Unit,
     openCaseBuilder: () -> Unit,
 ) {
-    ScreenScaffold(title = "Forensim", header = {
+    ScreenScaffold(title = "ForenSim", header = {
         val photo by com.forensim.app.ui.LocalAppContainer.current.profile.avatar.collectAsStateWithLifecycle()
         com.forensim.app.core.designsystem.HomeHeader(
             greeting = com.forensim.app.core.designsystem.headerGreeting(user.fullName),
@@ -849,7 +849,7 @@ private fun ExportButton(vm: ProfessorViewModel) {
         }
         val send = Intent(Intent.ACTION_SEND).apply {
             type = "text/csv"
-            putExtra(Intent.EXTRA_SUBJECT, "Forensim class report")
+            putExtra(Intent.EXTRA_SUBJECT, "ForenSim class report")
             putExtra(Intent.EXTRA_TEXT, csv)
         }
         context.startActivity(Intent.createChooser(send, "Export class report"))

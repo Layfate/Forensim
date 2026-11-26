@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/images/forensim-logo.png" width="160" alt="Forensim logo">
+  <img src="docs/images/forensim-logo.png" width="160" alt="ForenSim logo">
 </p>
 
-<h1 align="center">Forensim</h1>
+<h1 align="center">ForenSim</h1>
 
 <p align="center">
   <b>Forensic science learning for criminology students.</b><br>
@@ -33,7 +33,7 @@
 
 ## About
 
-Forensim turns forensic science coursework into hands-on practice. Professors run their subject
+ForenSim turns forensic science coursework into hands-on practice. Professors run their subject
 classes, publish lessons and quizzes, and generate crime-scene cases; students study, test
 themselves, and process those scenes in 3D before deciding what happened. An evidence lab lets
 everyone inspect evidence up close, including in augmented reality through the phone camera.
@@ -51,7 +51,7 @@ everyone inspect evidence up close, including in augmented reality through the p
 - **Report and block:** report a chat message, a classmate or an AI answer, and block someone so their messages are hidden.
 
 ### For professors
-- **Case generator:** choose the case type, room, 2–7 evidence items, red herrings and an optional victim; Forensim builds a solvable scene and gives a code and QR to share. Case briefings are written to match the scene without giving the answer away.
+- **Case generator:** choose the case type, room, 2–7 evidence items, red herrings and an optional victim; ForenSim builds a solvable scene and gives a code and QR to share. Case briefings are written to match the scene without giving the answer away.
 - **Class management:** class codes, join approval, roster, class chat, visibility of each lesson and quiz.
 - **Assessment:** graded or practice cases and quizzes, feedback release, insights and CSV export.
 - **AI quiz drafts** from a topic or an uploaded PDF, reviewed before publishing.
@@ -137,7 +137,7 @@ art/           Blender sources and scripts for the 3D models
 
 ## Project status
 
-Forensim is in active development. Lesson content is a draft under instructor review. Issues and
+ForenSim is in active development. Lesson content is a draft under instructor review. Issues and
 suggestions are welcome via [GitHub Issues](https://github.com/Layfate/Forensim/issues).
 
 ## Reporting a vulnerability
@@ -148,4 +148,4 @@ instead; see [SECURITY.md](SECURITY.md).
 
 ## License
 
-Forensim is released under the [MIT License](LICENSE). Copyright (c) 2026 Layfate.
+ForenSim is released under the [MIT License](LICENSE). Copyright (c) 2026 Layfate.

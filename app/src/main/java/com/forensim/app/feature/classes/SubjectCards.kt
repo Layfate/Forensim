@@ -174,15 +174,15 @@ fun ClassCodeRow(
 
 fun copyCode(context: Context, code: String) {
     val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    cm.setPrimaryClip(ClipData.newPlainText("Forensim class code", code))
+    cm.setPrimaryClip(ClipData.newPlainText("ForenSim class code", code))
     Toast.makeText(context, "Class code $code copied", Toast.LENGTH_SHORT).show()
 }
 
 fun shareCode(context: Context, code: String, subject: String? = null) {
     val text = buildString {
         append("Join my ")
-        append(subject ?: "Forensim")
-        append(" class on Forensim with the code: ")
+        append(subject ?: "ForenSim")
+        append(" class on ForenSim with the code: ")
         append(code)
     }
     context.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {

@@ -495,7 +495,7 @@ private fun JoinCaseCard(onOpen: (String) -> Unit) {
             androidx.compose.material3.FilledTonalIconButton(
                 onClick = {
                     scanCaseQr(context, onCode = { scanned ->
-                        if (scanned == null) message = "That QR code isn't a Forensim case." else { code = scanned; onOpen(scanned) }
+                        if (scanned == null) message = "That QR code isn't a ForenSim case." else { code = scanned; onOpen(scanned) }
                     }, onError = { message = it })
                 },
                 modifier = Modifier.size(56.dp),

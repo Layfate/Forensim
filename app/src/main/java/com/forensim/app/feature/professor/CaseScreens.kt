@@ -353,7 +353,7 @@ fun CaseDetailScreen(vm: ProfessorViewModel, caseId: String, onBack: () -> Unit)
                                 Icon(Icons.Outlined.ContentCopy, contentDescription = null); Spacer(Modifier.width(Spacing.xs)); Text("Copy")
                             }
                             PrimaryButton("Share", onClick = {
-                                val text = "Forensim case \"${k.title}\": open Simulate → Join a case and enter ${k.code}."
+                                val text = "ForenSim case \"${k.title}\": open Simulate → Join a case and enter ${k.code}."
                                 context.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, text), "Share case code"))
                             })
                         }

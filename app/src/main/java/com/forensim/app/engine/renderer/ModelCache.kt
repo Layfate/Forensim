@@ -22,7 +22,7 @@ object ModelCache {
             } catch (e: IOException) {
                 Result.failure(e) // not shipped: callers draw primitives instead
             } catch (e: RuntimeException) {
-                Log.e("Forensim", "Could not read $path", e)
+                Log.e("ForenSim", "Could not read $path", e)
                 Result.failure(e)
             }
         }.getOrNull()

@@ -140,7 +140,7 @@ export async function freeChat(o: ChatOptions): Promise<ChatResult> {
     try {
       const res = await fetch(`${API}/chat/completions`, {
         method: "POST",
-        headers: { "Authorization": `Bearer ${o.keys[keyIndex]}`, "Content-Type": "application/json", "X-Title": "Forensim" },
+        headers: { "Authorization": `Bearer ${o.keys[keyIndex]}`, "Content-Type": "application/json", "X-Title": "ForenSim" },
         body: JSON.stringify({
           model, messages: o.messages, temperature: o.temperature, max_tokens: o.maxTokens,
           ...(o.json && jsonMode ? { response_format: { type: "json_object" } } : {}),

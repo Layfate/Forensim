@@ -1,4 +1,4 @@
-# Forensim Android design system
+# ForenSim Android design system
 
 ## UI audit
 
@@ -13,7 +13,7 @@
 
 ## Foundations
 
-The refresh used [UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) to generate design directions and look up Jetpack Compose, lazy-list, and touch guidance. The final design uses the skill’s minimal hierarchy and low-motion recommendations with Forensim’s existing adult academic audience, detective mark, graphite background, and cyan accents.
+The refresh used [UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) to generate design directions and look up Jetpack Compose, lazy-list, and touch guidance. The final design uses the skill’s minimal hierarchy and low-motion recommendations with ForenSim’s existing adult academic audience, detective mark, graphite background, and cyan accents.
 
 | Role | Dark | Light |
 |---|---|---|

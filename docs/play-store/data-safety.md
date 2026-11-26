@@ -1,4 +1,4 @@
-# Play Console: Data safety answers (Forensim)
+# Play Console: Data safety answers (ForenSim)
 
 Fill **Play Console > App content > Data safety** with these answers. They match the in-app
 Privacy Policy (`LegalScreens.kt`, effective November 26, 2026). If the app's data handling
@@ -16,10 +16,10 @@ changes, update this file, the Privacy Policy and the form together.
 ### What "shared" means here
 
 Supabase (hosting) is a service provider, so data stored there is **not shared**. Google/Facebook
-sign-in send data *to* Forensim; that is not sharing either.
+sign-in send data *to* ForenSim; that is not sharing either.
 
 The AI features use **free models through OpenRouter**. Free-model providers may keep requests and
-use them to improve their models, so they are not acting only on Forensim's behalf. To be safe,
+use them to improve their models, so they are not acting only on ForenSim's behalf. To be safe,
 the text sent to the AI is declared as **Shared** (purpose: App functionality). Only that text is
 sent: no name, email or account ID.
 
@@ -38,7 +38,7 @@ sent: no name, email or account ID.
 | App activity > **Other user-generated content** (quiz answers, typed evidence answers, AI tutor questions, content reports) | Yes | **Yes** | No | Optional | App functionality |
 
 Notes:
-- AI tutor questions go to the AI and are **not stored** by Forensim (only a usage record),
+- AI tutor questions go to the AI and are **not stored** by ForenSim (only a usage record),
   unless the user reports the answer. Stored quiz answers and reports are in the same type, so it is
   not marked ephemeral as a whole.
 - The PDF file is not uploaded for quiz generation: its text is extracted on the device and sent

@@ -188,7 +188,7 @@ fun ArCameraScreen(typeKey: String, onBack: () -> Unit) {
                     },
                     secondary = cameraViewOffer)
                 !cameraGranted -> Message(
-                    if (cameraAsked) "This needs the camera to show your room. Allow camera access in the phone's Settings > Apps > Forensim > Permissions."
+                    if (cameraAsked) "This needs the camera to show your room. Allow camera access in the phone's Settings > Apps > ForenSim > Permissions."
                     else "The evidence appears in your real room through the camera. Nothing is recorded or uploaded.",
                     action = "Allow camera" to { askCamera.launch(Manifest.permission.CAMERA) })
                 useCameraView -> CameraView(type, select, fullArMissing = support == ArSupport.UNSUPPORTED)

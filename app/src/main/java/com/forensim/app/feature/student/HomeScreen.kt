@@ -286,7 +286,7 @@ fun HomeScreen(
     openClasses: () -> Unit = {},
 ) {
     val vm = appViewModel { StudentDashboardViewModel(it) }
-    ScreenScaffold(title = "Forensim", header = {
+    ScreenScaffold(title = "ForenSim", header = {
         val photo by com.forensim.app.ui.LocalAppContainer.current.profile.avatar.collectAsStateWithLifecycle()
         com.forensim.app.core.designsystem.HomeHeader(
             greeting = com.forensim.app.core.designsystem.headerGreeting(user.fullName),

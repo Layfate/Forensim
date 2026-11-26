@@ -42,7 +42,7 @@ fun qrImage(content: String, sizePx: Int = 720): ImageBitmap {
 
 /**
  * Opens Google's code scanner (runs in Play services: no camera permission, nothing to bundle).
- * [onCode] gets the parsed case code, or null when the QR isn't a Forensim case.
+ * [onCode] gets the parsed case code, or null when the QR isn't a ForenSim case.
  */
 fun scanCaseQr(context: Context, onCode: (String?) -> Unit, onError: (String) -> Unit) {
     val options = GmsBarcodeScannerOptions.Builder().setBarcodeFormats(Barcode.FORMAT_QR_CODE).enableAutoZoom().build()

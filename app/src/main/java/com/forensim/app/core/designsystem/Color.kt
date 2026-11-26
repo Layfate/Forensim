@@ -3,7 +3,7 @@ package com.forensim.app.core.designsystem
 import androidx.compose.ui.graphics.Color
 
 /**
- * Forensim colour tokens: maroon & peach palette (2026-11 redesign, colours chosen by the owner).
+ * ForenSim colour tokens: maroon & peach palette (2026-11 redesign, colours chosen by the owner).
  *
  * Light (2026-11, modelled on a marketplace app's light UI): #FAFAFA page, white cards and bars
  * with #E4E5E7 hairlines, near-black #222325 ink for text, deep maroon #74293B for primary

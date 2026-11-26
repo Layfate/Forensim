@@ -69,7 +69,7 @@ private fun lensInfo(camera: androidx.camera.core.Camera): LensInfo? = runCatchi
 
 /**
  * AR on phones without ARCore: the live back camera fills the screen and the specimen stands on
- * the printed Forensim marker when it is in view (OpenCV: true size, stays put as the student
+ * the printed ForenSim marker when it is in view (OpenCV: true size, stays put as the student
  * walks around). Without the marker it is held in place by the rotation sensor (turning only).
  */
 @Composable
@@ -179,7 +179,7 @@ internal fun CameraView(type: EvidenceType, onSelect: (EvidenceType) -> Unit, fu
             horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Spacing.sm)) {
             val hint = cameraError ?: when {
                 markerVisible -> "On the marker: walk around it. Keep the marker in view. Swipe for the next specimen."
-                markerAvailable -> "Point the camera at the Forensim marker (Print marker), or point down at a table and tap Place on table."
+                markerAvailable -> "Point the camera at the ForenSim marker (Print marker), or point down at a table and tap Place on table."
                 else -> "Point the camera down at a table and tap Place on table. Swipe for the next specimen, pinch to enlarge."
             }
             Surface(shape = MaterialTheme.shapes.large, color = Color.Black.copy(alpha = 0.6f), contentColor = Color.White,

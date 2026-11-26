@@ -500,7 +500,7 @@ abstract class GlesRenderer(private val assets: AssetManager? = null) : GLSurfac
             try {
                 GpuModel(cpu)
             } catch (e: RuntimeException) {
-                Log.e("Forensim", "Could not upload $path", e)
+                Log.e("ForenSim", "Could not upload $path", e)
                 null
             }
         }
@@ -669,7 +669,7 @@ abstract class GlesRenderer(private val assets: AssetManager? = null) : GLSurfac
             GLES30.glCompileShader(s)
             val ok = IntArray(1)
             GLES30.glGetShaderiv(s, GLES30.GL_COMPILE_STATUS, ok, 0)
-            if (ok[0] == 0) Log.e("Forensim", "Shader error: " + GLES30.glGetShaderInfoLog(s))
+            if (ok[0] == 0) Log.e("ForenSim", "Shader error: " + GLES30.glGetShaderInfoLog(s))
             return s
         }
         val p = GLES30.glCreateProgram()

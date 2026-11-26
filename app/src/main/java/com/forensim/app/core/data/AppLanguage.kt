@@ -6,7 +6,7 @@ import java.util.Locale
 
 /**
  * App languages. Stored by AppCompat's per-app locale support (Android 13+ also shows it under
- * Settings > Apps > Forensim > Language), so the choice survives restarts without our own key.
+ * Settings > Apps > ForenSim > Language), so the choice survives restarts without our own key.
  */
 enum class AppLanguage(val tag: String, val nativeName: String, val englishName: String) {
     ENGLISH("en", "English", "English"),

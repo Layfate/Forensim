@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.forensim.app.R
 
 /**
- * The Forensim mark: a white detective stencil in a dark circle, so it sits at the same shape as
+ * The ForenSim mark: a white detective stencil in a dark circle, so it sits at the same shape as
  * a profile avatar. The same badge is used in both themes; on the dark theme a faint hairline
  * ring keeps the dark circle from melting into the near-black page.
  */
@@ -48,9 +48,9 @@ fun ForensimLogo(
     textStyle: TextStyle = MaterialTheme.typography.headlineMedium,
     color: Color = MaterialTheme.colorScheme.onBackground,
 ) {
-    Row(modifier.clearAndSetSemantics { contentDescription = "Forensim" }, verticalAlignment = Alignment.CenterVertically) {
+    Row(modifier.clearAndSetSemantics { contentDescription = "ForenSim" }, verticalAlignment = Alignment.CenterVertically) {
         ForensimMark(markSize)
         Spacer(Modifier.width(markSize * 0.25f))
-        Text("Forensim", style = textStyle, color = color)
+        Text("ForenSim", style = textStyle, color = color)
     }
 }

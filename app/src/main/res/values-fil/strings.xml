@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Filipino (Tagalog). Keep keys in sync with values/strings.xml. -->
 <resources>
-    <string name="app_name">Forensim</string>
+    <string name="app_name">ForenSim</string>
     <string name="nav_home">Home</string>
     <string name="nav_classes">Mga Klase</string>
     <string name="nav_simulate">Simulasyon</string>
@@ -93,7 +93,7 @@
     <string name="language">Wika</string>
     <string name="video_performance">Video at performance</string>
     <string name="sound">Tunog</string>
-    <string name="about_forensim">Tungkol sa Forensim</string>
+    <string name="about_forensim">Tungkol sa ForenSim</string>
     <string name="about">Tungkol</string>
     <string name="theme_system_summary">Tema ng system</string>
     <string name="theme_dark_summary">Dark mode</string>
@@ -112,7 +112,7 @@
     <string name="notifications_on_summary">Naka-on · %1$d sa 4 na uri</string>
     <string name="notifications_off_summary">Naka-off sa system settings</string>
     <string name="notifications_allowed">Naka-on ang mga notification</string>
-    <string name="notifications_allowed_body">Makakapagpadala ang Forensim ng mga alerto. Mababago mo ito anumang oras sa settings ng iyong telepono.</string>
+    <string name="notifications_allowed_body">Makakapagpadala ang ForenSim ng mga alerto. Mababago mo ito anumang oras sa settings ng iyong telepono.</string>
     <string name="notifications_blocked">Naka-off ang mga notification</string>
     <string name="notifications_blocked_body">I-on para malaman ang mga bagong aralin, marka at balita ng klase.</string>
     <string name="notifications_turn_on">I-on</string>
@@ -123,11 +123,11 @@
     <string name="notify_grades">Mga marka at feedback</string>
     <string name="notify_grades_sub">Kapag inilabas ang resulta ng quiz o kaso</string>
     <string name="notify_announcements">Mga anunsyo ng klase</string>
-    <string name="notify_announcements_sub">Mga paalala mula sa iyong propesor o sa Forensim</string>
+    <string name="notify_announcements_sub">Mga paalala mula sa iyong propesor o sa ForenSim</string>
     <string name="notify_reminders">Mga paalala sa pag-aaral</string>
     <string name="notify_reminders_sub">Isang paalala para magpatuloy ka</string>
     <string name="theme">Tema</string>
-    <string name="theme_hint">Kapag ‘System’ ang napili, kusang iaangkop ng Forensim ang itsura batay sa system settings ng iyong device.</string>
+    <string name="theme_hint">Kapag ‘System’ ang napili, kusang iaangkop ng ForenSim ang itsura batay sa system settings ng iyong device.</string>
     <string name="theme_system">System</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_light">Light</string>
@@ -221,14 +221,14 @@
     <string name="cap_arcore">ARCore world tracking</string>
     <string name="available">Available</string>
     <string name="unavailable">Hindi available</string>
-    <string name="auth_welcome">Maligayang pagdating sa Forensim</string>
+    <string name="auth_welcome">Maligayang pagdating sa ForenSim</string>
     <string name="auth_sign_in_prompt">Ilagay ang iyong rehistradong email at password.</string>
     <string name="auth_continue">Magpatuloy</string>
     <string name="auth_or">O</string>
     <string name="auth_join">Sumali</string>
     <string name="auth_forgot">Nakalimutan ang Password</string>
     <string name="auth_sign_up">Mag-sign Up</string>
-    <string name="auth_join_title">Sumali sa Forensim</string>
+    <string name="auth_join_title">Sumali sa ForenSim</string>
     <string name="auth_back_to_sign_in">Bumalik sa pag-sign in</string>
     <string name="create_your_account">Gumawa ng iyong account</string>
     <string name="sign_in_desc">Mag-sign in para ituloy ang iyong mga aralin, kaso at quiz.</string>
@@ -244,10 +244,10 @@
     <string name="continue_google">Magpatuloy gamit ang Google</string>
     <string name="continue_facebook">Magpatuloy gamit ang Facebook</string>
     <string name="already_have_account">May account ka na?</string>
-    <string name="new_to_forensim">Bago sa Forensim?</string>
+    <string name="new_to_forensim">Bago sa ForenSim?</string>
     <string name="create_an_account">Gumawa ng account</string>
     <string name="new_accounts_note">Estudyante ang lahat ng bagong account. Inaaprubahan ng administrator ang mga propesor.</string>
-    <string name="training_disclaimer">Ang Forensim ay isang training simulation, hindi isang validated na kasangkapan sa imbestigasyon.</string>
+    <string name="training_disclaimer">Ang ForenSim ay isang training simulation, hindi isang validated na kasangkapan sa imbestigasyon.</string>
     <string name="reset_your_password">I-reset ang iyong password</string>
     <string name="reset_body">Ie-email namin sa iyo ang link para pumili ng bagong password.</string>
     <string name="password_strength">Lakas ng password</string>
@@ -358,7 +358,7 @@
     <string name="consent_create">Sa paggawa ng account, sumasang-ayon ka sa aming %1$s at kinikilala mo ang aming %2$s.</string>
     <string name="legal_section">Legal</string>
     <string name="delete_account">Burahin ang account</string>
-    <string name="delete_account_intro">Permanenteng burahin ang iyong Forensim account at ang datos na kaugnay nito. Hindi na ito maibabalik.</string>
+    <string name="delete_account_intro">Permanenteng burahin ang iyong ForenSim account at ang datos na kaugnay nito. Hindi na ito maibabalik.</string>
     <string name="delete_account_title">Burahin ang iyong account?</string>
     <string name="delete_account_body">Permanenteng mabubura ang %1$s at ikaw ay mala-log out. Hindi na ito maibabalik.</string>
     <string name="delete_account_list">Mabubura: ang iyong profile at larawan, mga klase, progreso sa aralin, mga sagot at marka sa quiz at kaso, mga chat message, streak sa quiz ng araw at tala ng paggamit ng AI tutor. Mananatili ang mga klase, aralin at kasong ginawa mo para sa iba upang hindi mawala ang gawain ng mga estudyante.</string>
@@ -419,7 +419,7 @@
     <string name="ob_request_sent">*Naipadala ang request.* Maaaring kailangan ka munang aprubahan ng iyong propesor bago lumabas ang klase.</string>
     <string name="ob_continue">Magpatuloy</string>
     <string name="ob_ai_title">AI tutor: privacy at datos</string>
-    <string name="ob_ai_1">Gumagamit ang AI tutor ng Forensim ng third-party na AI model (Anthropic) para sagutin ang mga tanong tungkol sa iyong mga aralin.</string>
+    <string name="ob_ai_1">Gumagamit ang AI tutor ng ForenSim ng third-party na AI model (Anthropic) para sagutin ang mga tanong tungkol sa iyong mga aralin.</string>
     <string name="ob_ai_2">Kapag nagtanong ka, ipinapadala ang tanong mo, ang kamakailang usapan at mga kaugnay na bahagi ng aralin para masagot ka. Kung tungkol sa progreso mo ang tanong, kasama ang maikling buod ng iyong mga resulta.</string>
     <string name="ob_ai_3">Hindi namin iniimbak sa aming server ang teksto ng mga tanong mo o ng sagot ng tutor, tala lang ng paggamit para sa pang-araw-araw na limitasyon.</string>
     <string name="ob_ai_4">Maaaring mali ang sagot ng AI. Suriin ang mahahalagang punto sa iyong mga aralin at sa iyong propesor. Naka-lock ang tutor habang may graded na quiz o kaso.</string>

@@ -139,9 +139,9 @@ class SimulationViewModel(private val c: AppContainer, val source: SimSource, pr
                 }
             }
             val location = CaseLocations.byId(started.case.location)
-                ?: throw ApiException(422, "This case uses a location your app doesn't have yet. Update Forensim and try again.")
+                ?: throw ApiException(422, "This case uses a location your app doesn't have yet. Update ForenSim and try again.")
             if (location.version < started.case.locationVersion) {
-                throw ApiException(422, "This case was made with a newer version of Forensim. Update the app and try again.")
+                throw ApiException(422, "This case was made with a newer version of ForenSim. Update the app and try again.")
             }
             attempt = started.attempt
             case = started.case

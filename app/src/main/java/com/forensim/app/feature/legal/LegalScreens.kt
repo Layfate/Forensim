@@ -20,7 +20,7 @@ import com.forensim.app.core.designsystem.WorkspaceList
  * with the Play Console listing whenever data practices change.
  */
 object LegalInfo {
-    const val APP = "Forensim"
+    const val APP = "ForenSim"
     const val CONTACT_EMAIL = "elorde.princeart6881@gmail.com"
     const val EFFECTIVE_DATE = "November 26, 2026"
 }
@@ -35,7 +35,7 @@ private val TERMS = listOf(
     LegalSection("1. Agreement", listOf(
         "These Terms of Use govern your use of the ${LegalInfo.APP} mobile application and its online services (together, \"${LegalInfo.APP}\"). By creating an account, signing in or using ${LegalInfo.APP}, you agree to these Terms and to our Privacy Policy. If you do not agree, do not use ${LegalInfo.APP}.",
     )),
-    LegalSection("2. Who may use Forensim", listOf(
+    LegalSection("2. Who may use ForenSim", listOf(
         "${LegalInfo.APP} is an educational tool for forensic science students, professors and school administrators. You must be at least 13 years old, and old enough under the law where you live to agree to these Terms (or have a parent or guardian agree on your behalf).",
         "You must give accurate account information, keep your password confidential and not share your account. You are responsible for activity under your account. Tell us right away at $e if you believe your account has been used without permission.",
     )),

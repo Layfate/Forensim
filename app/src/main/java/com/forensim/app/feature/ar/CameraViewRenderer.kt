@@ -14,7 +14,7 @@ import kotlin.math.exp
  * AR for phones without ARCore. The live camera image ([CameraFeed]) is drawn full-screen, then
  * the specimen, in one of two ways:
  *
- *  - **Marker mode** (the printed Forensim marker is in view): OpenCV measures where the marker is
+ *  - **Marker mode** (the printed ForenSim marker is in view): OpenCV measures where the marker is
  *    ([MarkerTracker]), so the specimen stands on it at true size and stays there as the student
  *    moves and walks around it, like ARCore but only around the marker.
  *  - **Sensor mode** (no marker): the phone's rotation sensor holds the specimen still while the

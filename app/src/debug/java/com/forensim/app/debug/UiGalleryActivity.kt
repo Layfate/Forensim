@@ -149,7 +149,7 @@ private fun WorkspacePreview(home: Boolean) {
     )
     com.forensim.app.core.designsystem.WorkspaceScaffold(destinations) {
         if (home) {
-            ScreenScaffold("Forensim", header = {
+            ScreenScaffold("ForenSim", header = {
                 HomeHeader(headerGreeting("Robin Cortez"), "Welcome back", "Robin Cortez", onProfile = {})
             }) { padding ->
                 WorkspaceList(Modifier.padding(padding)) {

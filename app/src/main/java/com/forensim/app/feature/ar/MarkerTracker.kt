@@ -71,7 +71,7 @@ class LensInfo(
 }
 
 /**
- * Finds the printed Forensim marker (ArUco, 4x4 dictionary) in each camera frame and measures the
+ * Finds the printed ForenSim marker (ArUco, 4x4 dictionary) in each camera frame and measures the
  * phone's position and angle relative to it (OpenCV solvePnP). With that, a specimen can sit on
  * the marker and stay put while the student walks around it, on phones without ARCore.
  * Runs on CameraX's analysis thread; [latest] is read by the renderer.
@@ -110,7 +110,7 @@ class MarkerTracker(private val lens: LensInfo) : ImageAnalysis.Analyzer {
         try {
             detector.detectMarkers(gray, corners, ids)
             if (corners.isEmpty()) return
-            // Only the Forensim marker (id 0), and only when it's big enough to be the real sheet:
+            // Only the ForenSim marker (id 0), and only when it's big enough to be the real sheet:
             // tiny look-alikes in a busy scene (keyboard keys, fabric patterns) are ignored.
             val idList = IntArray(ids.rows()).also { if (it.isNotEmpty()) ids.get(0, 0, it) }
             val minArea = (MIN_SIDE_PX * MIN_SIDE_PX).toDouble()

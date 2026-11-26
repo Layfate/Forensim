@@ -30,7 +30,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.forensim.app.R
 
 /**
- * Forensim's Lottie animations (authored for the app in LottieFiles Creator, see res/raw):
+ * ForenSim's Lottie animations (authored for the app in LottieFiles Creator, see res/raw):
  *  - [SUCCESS]: badge pops, check draws on, fingerprint arcs and sparks burst. Plays once.
  *  - [SCAN]: fingerprint ridges with a scan beam. Loops; used for loading.
  *  - [REVIEW]: magnifier sweeping a case file. Loops; used for "keep practising" and empty states.

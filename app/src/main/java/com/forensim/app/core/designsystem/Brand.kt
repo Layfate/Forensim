@@ -139,7 +139,7 @@ private val LowerRightTriangle = androidx.compose.foundation.shape.GenericShape 
     moveTo(size.width, 0f); lineTo(size.width, size.height); lineTo(0f, size.height); close()
 }
 
-/** Miniature phone: frame, Forensim badge, a title bar, three tiles and a content block. */
+/** Miniature phone: frame, ForenSim badge, a title bar, three tiles and a content block. */
 @Composable
 private fun PhoneMock(dark: Boolean, modifier: Modifier) {
     val frame = if (dark) Color(0xFF3A3B40) else Palette.LightHair

@@ -1,6 +1,6 @@
-# Play Console: Store listing (Forensim)
+# Play Console: Store listing (ForenSim)
 
-**App name** (max 30): `Forensim: Forensic Science Lab`
+**App name** (max 30): `ForenSim: Forensic Science Lab`
 
 **Short description** (max 80):
 `Learn forensic science with 3D crime scenes, AR evidence, quizzes and an AI tutor.`
@@ -11,7 +11,7 @@
 
 ## Full description (max 4000)
 
-Forensim is a forensic science learning app for college students and their professors. Study the
+ForenSim is a forensic science learning app for college students and their professors. Study the
 theory, then walk into a 3D crime scene and practise doing it right.
 
 INVESTIGATE IN 3D
@@ -43,7 +43,7 @@ FOR PROFESSORS
 • Publish quizzes and generate crime-scene cases
 • See every student's scores and download them as a spreadsheet (CSV)
 
-Available in English and Filipino. Forensim is a training simulation for education; it is not a
+Available in English and Filipino. ForenSim is a training simulation for education; it is not a
 tool for processing real evidence.
 
 ## Graphics checklist

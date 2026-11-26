@@ -187,7 +187,7 @@ fun ResetPasswordScreen(user: UserAccount) {
                             style = MaterialTheme.typography.bodyLarge, color = cs.onSurfaceVariant,
                             textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
                         Spacer(Modifier.height(Spacing.xl))
-                        PrimaryButton("Continue to Forensim", onClick = { c.auth.dismissPasswordRecovery() }, modifier = Modifier.fillMaxWidth())
+                        PrimaryButton("Continue to ForenSim", onClick = { c.auth.dismissPasswordRecovery() }, modifier = Modifier.fillMaxWidth())
                     }
                 }
             }

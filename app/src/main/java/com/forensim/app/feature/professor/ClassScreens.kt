@@ -656,7 +656,7 @@ internal fun ProfessorClassDetail(
                 AlertDialog(
                     onDismissRequest = { confirmDelete = false },
                     title = { Text("Delete ${k.name}?") },
-                    text = { Text("Students are removed from the class and its quizzes and results are deleted. The subject's lessons stay in Forensim.") },
+                    text = { Text("Students are removed from the class and its quizzes and results are deleted. The subject's lessons stay in ForenSim.") },
                     confirmButton = {
                         TextButton(onClick = { confirmDelete = false; vm.deleteClass(k, onDone = onBack) },
                             colors = androidx.compose.material3.ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error)) { Text("Delete") }

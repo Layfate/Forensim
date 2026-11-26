@@ -269,7 +269,7 @@ fun ClassChatScreen(classId: String, title: String, canModerate: Boolean, onBack
                 ChatStatus.LOADING -> Box(Modifier.weight(1f)) { LoadingState(label = "Loading messages") }
                 ChatStatus.UNAVAILABLE -> Box(Modifier.weight(1f)) {
                     EmptyState(Icons.Outlined.Forum, "Class chat isn't switched on yet",
-                        "Your school's Forensim server needs an update before chat can be used.")
+                        "Your school's ForenSim server needs an update before chat can be used.")
                 }
                 ChatStatus.ERROR -> Box(Modifier.weight(1f)) {
                     EmptyState(Icons.Outlined.Forum, "Couldn't load the chat", vm.error ?: "Try again.", actionLabel = "Try again", onAction = { vm.refresh(first = true) })

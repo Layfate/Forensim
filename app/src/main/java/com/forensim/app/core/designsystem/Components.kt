@@ -143,7 +143,7 @@ fun HomeHeader(
             .padding(start = Spacing.md, end = Spacing.sm, top = Spacing.sm, bottom = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        ForensimMark(HeaderLogoSize, Modifier.semantics { contentDescription = "Forensim" })
+        ForensimMark(HeaderLogoSize, Modifier.semantics { contentDescription = "ForenSim" })
         Spacer(Modifier.width(12.dp))
         Column(Modifier.weight(1f).semantics(mergeDescendants = true) { heading() }) {
             Text(greeting, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurface,

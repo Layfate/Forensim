@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- English (default). Filipino translations live in values-fil/strings.xml with the same keys. -->
 <resources>
-    <string name="app_name">Forensim</string>
+    <string name="app_name">ForenSim</string>
     <string name="nav_home">Home</string>
     <string name="nav_classes">Classes</string>
     <string name="nav_simulate">Simulate</string>
@@ -93,7 +93,7 @@
     <string name="language">Language</string>
     <string name="video_performance">Video and performance</string>
     <string name="sound">Sound</string>
-    <string name="about_forensim">About Forensim</string>
+    <string name="about_forensim">About ForenSim</string>
     <string name="about">About</string>
     <string name="theme_system_summary">System theme</string>
     <string name="theme_dark_summary">Dark mode</string>
@@ -112,7 +112,7 @@
     <string name="notifications_on_summary">On · %1$d of 4 types</string>
     <string name="notifications_off_summary">Off in system settings</string>
     <string name="notifications_allowed">Notifications are on</string>
-    <string name="notifications_allowed_body">Forensim can send you alerts. You can change this any time in your phone’s settings.</string>
+    <string name="notifications_allowed_body">ForenSim can send you alerts. You can change this any time in your phone’s settings.</string>
     <string name="notifications_blocked">Notifications are off</string>
     <string name="notifications_blocked_body">Turn them on to hear about new lessons, grades and class news.</string>
     <string name="notifications_turn_on">Turn on</string>
@@ -123,11 +123,11 @@
     <string name="notify_grades">Grades and feedback</string>
     <string name="notify_grades_sub">When a quiz or case result is released</string>
     <string name="notify_announcements">Class announcements</string>
-    <string name="notify_announcements_sub">Notices from your professor or Forensim</string>
+    <string name="notify_announcements_sub">Notices from your professor or ForenSim</string>
     <string name="notify_reminders">Study reminders</string>
     <string name="notify_reminders_sub">A nudge to keep your streak going</string>
     <string name="theme">Theme</string>
-    <string name="theme_hint">If ‘System’ is selected, Forensim will automatically adjust your appearance based on your device’s system settings.</string>
+    <string name="theme_hint">If ‘System’ is selected, ForenSim will automatically adjust your appearance based on your device’s system settings.</string>
     <string name="theme_system">System</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_light">Light</string>
@@ -221,14 +221,14 @@
     <string name="cap_arcore">ARCore world tracking</string>
     <string name="available">Available</string>
     <string name="unavailable">Unavailable</string>
-    <string name="auth_welcome">Welcome to Forensim</string>
+    <string name="auth_welcome">Welcome to ForenSim</string>
     <string name="auth_sign_in_prompt">Please enter your registration email and password.</string>
     <string name="auth_continue">Continue</string>
     <string name="auth_or">Or</string>
     <string name="auth_join">Join</string>
     <string name="auth_forgot">Forgot Password</string>
     <string name="auth_sign_up">Sign Up</string>
-    <string name="auth_join_title">Join Forensim</string>
+    <string name="auth_join_title">Join ForenSim</string>
     <string name="auth_back_to_sign_in">Back to sign in</string>
     <string name="create_your_account">Create your account</string>
     <string name="sign_in_desc">Sign in to continue your lessons, cases and quizzes.</string>
@@ -244,10 +244,10 @@
     <string name="continue_google">Continue with Google</string>
     <string name="continue_facebook">Continue with Facebook</string>
     <string name="already_have_account">Already have an account?</string>
-    <string name="new_to_forensim">New to Forensim?</string>
+    <string name="new_to_forensim">New to ForenSim?</string>
     <string name="create_an_account">Create an account</string>
     <string name="new_accounts_note">New accounts start as students. Professors are approved by an administrator.</string>
-    <string name="training_disclaimer">Forensim is a training simulation, not a validated investigative instrument.</string>
+    <string name="training_disclaimer">ForenSim is a training simulation, not a validated investigative instrument.</string>
     <string name="reset_your_password">Reset your password</string>
     <string name="reset_body">We\'ll e-mail you a link to choose a new password.</string>
     <string name="password_strength">Password strength</string>
@@ -358,7 +358,7 @@
     <string name="consent_create">By creating an account, you agree to our %1$s and acknowledge our %2$s.</string>
     <string name="legal_section">Legal</string>
     <string name="delete_account">Delete account</string>
-    <string name="delete_account_intro">Permanently delete your Forensim account and the data linked to it. This can\'t be undone.</string>
+    <string name="delete_account_intro">Permanently delete your ForenSim account and the data linked to it. This can\'t be undone.</string>
     <string name="delete_account_title">Delete your account?</string>
     <string name="delete_account_body">This permanently deletes %1$s and signs you out. You can\'t undo it.</string>
     <string name="delete_account_list">Deleted: your profile and photo, class memberships, lesson progress, quiz and case attempts and scores, chat messages, daily quiz streak and AI tutor usage records. Classes, lessons and cases you created for others stay so students don\'t lose their coursework.</string>
@@ -419,7 +419,7 @@
     <string name="ob_request_sent">*Request sent.* Your professor may need to approve you before the class appears.</string>
     <string name="ob_continue">Continue</string>
     <string name="ob_ai_title">AI tutor: privacy &amp; data</string>
-    <string name="ob_ai_1">Forensim\'s AI tutor uses a third-party AI model (Anthropic) to answer questions about your lessons.</string>
+    <string name="ob_ai_1">ForenSim\'s AI tutor uses a third-party AI model (Anthropic) to answer questions about your lessons.</string>
     <string name="ob_ai_2">When you ask something, your question, the recent conversation and relevant lesson excerpts are sent to answer you. If you ask about your progress, a short summary of your recent results is included.</string>
     <string name="ob_ai_3">We don\'t store the text of your questions or the tutor\'s answers on our servers, only a usage record to apply daily limits.</string>
     <string name="ob_ai_4">AI answers can be wrong. Check important points against your lessons and your professor. During a graded quiz or case, the tutor is locked.</string>
